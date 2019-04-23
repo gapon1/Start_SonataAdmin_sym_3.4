@@ -109,6 +109,11 @@ sonata_user:
         group: Application\Sonata\UserBundle\Entity\Group
 
 fos_user:
+
+    registration:
+        form:
+            type: AppBundle\Form\RegistrationType
+
     db_driver:      orm # can be orm or odm
     firewall_name:  main
     user_class:     Application\Sonata\UserBundle\Entity\User

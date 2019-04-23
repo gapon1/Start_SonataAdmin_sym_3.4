@@ -40,3 +40,8 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: CarAdmin }
         public: true
+
+    app.form.registration:
+        class: AppBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
