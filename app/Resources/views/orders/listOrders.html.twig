@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Taxo Park All Orders {% endblock %}
+
+{% block body %}
+
+    <h2 class="genus-name">Orders List</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>From Address</th>
+            <th>To Address</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>
+                    <a href="{{ path('order_show',{'orderId': order.id}) }}">{{ order.id }}</a>
+                </td>
+                <td>{{ order.fromAddress }}</td>
+                <td>{{ order.toAddress }}</td>
+                <td>{{ order.status }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <br/>
+    <div class="pagination text-center">
+        {{ knp_pagination_render(orders) }}
+    </div>
+
+{% endblock %}

@@ -49,7 +49,6 @@ class CarAdmin
      */
     private $carDiscript;
 
-
     /**
      * Get id.
      *
@@ -70,7 +69,6 @@ class CarAdmin
     public function setCarName($carName)
     {
         $this->carName = $carName;
-
         return $this;
     }
 
@@ -94,7 +92,6 @@ class CarAdmin
     public function setCarImg($carImg)
     {
         $this->carImg = $carImg;
-
         return $this;
     }
 
@@ -118,7 +115,6 @@ class CarAdmin
     public function setCarType($carType)
     {
         $this->carType = $carType;
-
         return $this;
     }
 
@@ -142,7 +138,6 @@ class CarAdmin
     public function setCarDiscript($carDiscript)
     {
         $this->carDiscript = $carDiscript;
-
         return $this;
     }
 

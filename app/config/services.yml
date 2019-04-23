@@ -41,6 +41,13 @@ services:
             - { name: sonata.admin, manager_type: orm, group: admin, label: CarAdmin }
         public: true
 
+    app.admin.orders:
+        class: AppBundle\Admin\OrdersAdmin
+        arguments: [~, AppBundle\Entity\Orders, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Orders }
+        public: true
+
     app.form.registration:
         class: AppBundle\Form\RegistrationType
         tags:
