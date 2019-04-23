@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Taxo Park Home {% endblock %}
+
+{% block body %}
+
+    <form method="post" class="contactForm">
+    {{ form_start(carForm) }}
+
+
+    {{ form_row(carForm.carName) }}
+    {{ form_row(carForm.carType) }}
+    {{ form_row(carForm.carDiscript) }}
+    {{ form_row(carForm.carImg) }}
+
+
+    <button type="submit" class="btn btn-primary" formnovalidate>Save</button>
+
+    {{ form_end(carForm) }}
+    </form>
+
+
+
+{% endblock %}
