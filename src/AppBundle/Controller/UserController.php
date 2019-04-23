@@ -27,17 +27,34 @@ class UserController extends Controller
              * @var User $user
              */
             $user = $form->getData();
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
             return new RedirectResponse($this->generateUrl('/admin/login'));
-
         }
-
         return $this->render('security/registration.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("user/{userName}", name="user_show")
+     */
+    public function showAction($userName)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('ApplicationSonataUserBundle:User')
+            ->findOneBy(['username' => $userName]);
+
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+//        dump($user);
+//        die();
+
+        return $this->render('users/show.html.twig', [
+            'user' => $user
         ]);
     }
 

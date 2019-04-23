@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,6 +49,56 @@ class CarAdmin
      * @ORM\Column(name="carDiscript", type="string", length=255)
      */
     private $carDiscript;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="driver_id", referencedColumnName="id")
+     */
+    private $driverId;
+
+    /**
+     * @return mixed
+     */
+    public function getDriverId()
+    {
+        return $this->driverId;
+    }
+
+    /**
+     * @param mixed $driverId
+     */
+    public function setDriverId($driverId): void
+    {
+        $this->driverId = $driverId;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Orders", mappedBy="car")
+     */
+    private $carId;
+
+    public function __construct()
+    {
+        $this->carId = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCarId(): int
+    {
+        return $this->carId;
+    }
+
+    /**
+     * @param mixed $carId
+     */
+    public function setCarId(int $carId)
+    {
+        $this->carId = $carId;
+    }
+
 
     /**
      * Get id.

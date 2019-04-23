@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Application\Sonata\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,70 +25,70 @@ class Orders
      */
     private $date;
 
-//    /**
-//     * @ORM\Column(type="string")
-//     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
-//     * @ORM\JoinColumn(name="driver_id", referencedColumnName="id"))
-//     */
-//    private $driver_id;
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getDriverIdOrd()
-//    {
-//        return $this->driver_id;
-//    }
-//
-//    /**
-//     * @param mixed $driver_id
-//     */
-//    public function setDriverIdOrd($driver_id)
-//    {
-//        $this->driver_id = $driver_id;
-//    }
-//
-//    /**
-//     * @Assert\NotBlank()
-//     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Car", inversedBy="orders")
-//     * @ORM\JoinColumn(name="car_id", referencedColumnName="id")
-//     */
-//    private $car;
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getCar(): string
-//    {
-//        return $this->car;
-//    }
-//
-//    /**
-//     * @param mixed $car
-//     */
-//    public function setCar(Car $car)
-//    {
-//        $this->car = $car;
-//    }
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="orders")
-//     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-//     */
-//    private $userOrder;
-//
-//
-//    public function getUserOrder(): int
-//    {
-//        return $this->userOrder;
-//    }
-//
-//    public function setUserOrder(User $userOrder):self
-//    {
-//        $this->setUserOrder($userOrder);
-//
-//        return $this;
-//    }
+    /**
+     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="driver_id", referencedColumnName="id"))
+     */
+    private $driver_id;
+
+    /**
+     * @return mixed
+     */
+    public function getDriverIdOrd()
+    {
+        return $this->driver_id;
+    }
+
+    /**
+     * @param mixed $driver_id
+     */
+    public function setDriverIdOrd($driver_id)
+    {
+        $this->driver_id = $driver_id;
+    }
+
+    /**
+     * @Assert\NotBlank()
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CarAdmin", inversedBy="orders")
+     * @ORM\JoinColumn(name="car_id", referencedColumnName="id")
+     */
+    private $car;
+
+    /**
+     * @return mixed
+     */
+    public function getCar(): string
+    {
+        return $this->car;
+    }
+
+    /**
+     * @param mixed $car
+     */
+    public function setCar(CarAdmin $car)
+    {
+        $this->car = $car;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="orders")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $userOrder;
+
+
+    public function getUserOrder(): int
+    {
+        return $this->userOrder;
+    }
+
+    public function setUserOrder(User $userOrder):self
+    {
+        $this->setUserOrder($userOrder);
+
+        return $this;
+    }
 
     /**
      * @ORM\Column(type="string")

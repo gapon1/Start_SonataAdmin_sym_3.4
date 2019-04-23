@@ -31,6 +31,7 @@ final class CarAdminAdmin extends AbstractAdmin
             ->add('carImg')
             ->add('carType')
             ->add('carDiscript')
+            ->add('driverId')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -48,6 +49,7 @@ final class CarAdminAdmin extends AbstractAdmin
             ->add('carImg')
             ->add('carType')
             ->add('carDiscript')
+            ->add('driverId')
         ;
     }
 
@@ -59,6 +61,7 @@ final class CarAdminAdmin extends AbstractAdmin
             ->add('carImg')
             ->add('carType')
             ->add('carDiscript')
+            ->add('driverId')
         ;
     }
 }

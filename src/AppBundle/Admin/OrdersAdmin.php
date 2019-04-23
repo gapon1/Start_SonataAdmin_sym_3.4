@@ -31,6 +31,7 @@ final class OrdersAdmin extends AbstractAdmin
             ->add('fromAddress')
             ->add('toAddress')
             ->add('status')
+            ->add('DriverIdOrd')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -48,6 +49,7 @@ final class OrdersAdmin extends AbstractAdmin
             ->add('fromAddress')
             ->add('toAddress')
             ->add('status')
+
         ;
     }
 
