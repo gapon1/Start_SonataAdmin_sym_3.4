@@ -4,20 +4,32 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class CarController extends Controller
 {
     /**
      * @Route("/car_list", name="car_list")
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $cars = $em->getRepository('AppBundle:CarAdmin')
             ->findAll();
 
+        /**
+         * @var $paginator
+         */
+        $paginator = $this->get('knp_paginator');
+
+        $result = $paginator->paginate(
+            $cars,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 3)
+        );
+
         return $this->render('car/carList.html.twig', [
-            'cars' => $cars
+            'cars' => $result
         ]);
     }
 

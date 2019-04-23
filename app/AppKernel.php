@@ -32,6 +32,7 @@ class AppKernel extends Kernel
 
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
 
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
         ];
 
