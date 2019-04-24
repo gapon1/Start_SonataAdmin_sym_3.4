@@ -66,31 +66,18 @@
                             <div class="navbar-inner">
                                 <nav>
                                     <ul class="nav topnav">
-                                        <li class="dropdown active">
-                                            <a href="/">Home</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ path('about') }}">About</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ path('contact') }}">Contact</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ path('car_list') }}">CarsList</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ path('orders_list') }}">OrdersList</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ path('get_free_car') }}">GetCar</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="{{ path('ordersForDriver') }}">Take Order</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ path('sonata_admin_dashboard') }}">Admin</a>
-                                        </li>
+                                        <li><a href="{{ path('homepage') }}">Home</a></li>
+                                        <li><a href="{{ path('about') }}">About</a></li>
+                                        <li><a href="{{ path('contact') }}">Contact</a></li>
+                                        {% if is_granted('ROLE_USER') and is_granted('ROLE_ADMIN') %}
+                                            <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:mainMenu') }} </li>
+                                        {% elseif is_granted('ROLE_CUSTOMER') %}
+                                            <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:customerMenu') }} </li>
+                                        {% elseif is_granted('ROLE_ADMIN') %}
+                                            <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:adminMenu') }} </li>
+                                        {% elseif is_granted('ROLE_DRIVER') %}
+                                            <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:driverMenu') }} </li>
+                                        {% endif %}
 
                                         {% if is_granted('ROLE_USER') %}
                                             <li>
@@ -103,11 +90,10 @@
                                                     Login</a>
                                             </li>
                                         {% endif %}
-
                                     </ul>
 
-
                                 </nav>
+
                             </div>
                         </div>
                         <!-- end menu -->

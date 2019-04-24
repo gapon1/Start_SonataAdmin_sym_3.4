@@ -7,6 +7,7 @@ use AppBundle\Form\DriverForType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 /**
@@ -20,6 +21,10 @@ class DriverController extends Controller
      */
     public function newAction()
     {
+        $session = new Session();
+        $user = $this->getUser()->getId();
+        $session->set('UserInfo', $user);
+
         $em = $this->getDoctrine()->getManager();
         $orders = $em->getRepository('AppBundle:Orders')
             ->findFreeOrder();

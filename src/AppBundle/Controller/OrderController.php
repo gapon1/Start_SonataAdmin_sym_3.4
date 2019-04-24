@@ -3,11 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\OrderFormType;
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class OrderController extends Controller
 {

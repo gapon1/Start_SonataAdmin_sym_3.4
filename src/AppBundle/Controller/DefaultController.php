@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller
@@ -13,10 +12,6 @@ class DefaultController extends Controller
      */
     public function homepageAction()
     {
-        $session = new Session();
-        $user = $this->getUser()->getId();
-        $session->set('UserInfo', $user);
-
         return $this->render('main/homepage.html.twig');
     }
     /**
