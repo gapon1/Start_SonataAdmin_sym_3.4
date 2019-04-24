@@ -1,8 +1,6 @@
 <?php
 
-
 namespace AppBundle\Controller;
-
 
 use AppBundle\Form\RegistrationType;
 use Application\Sonata\UserBundle\Entity\User;
@@ -49,9 +47,6 @@ class UserController extends Controller
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
-
-//        dump($user);
-//        die();
 
         return $this->render('users/show.html.twig', [
             'user' => $user
