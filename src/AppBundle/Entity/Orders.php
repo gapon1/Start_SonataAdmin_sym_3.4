@@ -58,9 +58,14 @@ class Orders
     /**
      * @return mixed
      */
-    public function getCar(): string
+    public function getCar(): ?string
     {
         return $this->car;
+    }
+
+    public function __toString()
+    {
+        return $this->getCar();
     }
 
     /**

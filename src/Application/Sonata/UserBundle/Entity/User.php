@@ -14,8 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * References:
  * @link http://www.doctrine-project.org/projects/orm/2.0/docs/reference/working-with-objects/en
- * @ORM\Entity
  * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="It looks like your already have an account!")
  */
 class User extends BaseUser

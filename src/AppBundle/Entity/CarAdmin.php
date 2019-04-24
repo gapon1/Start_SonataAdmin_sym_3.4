@@ -133,6 +133,11 @@ class CarAdmin
         return $this->carName;
     }
 
+    public function __toString()
+    {
+      return $this->getCarName();
+    }
+
     /**
      * Set carImg.
      *

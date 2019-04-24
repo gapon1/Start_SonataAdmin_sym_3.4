@@ -2,9 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\OrderFormType;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class OrderController extends Controller
 {
@@ -48,6 +51,67 @@ class OrderController extends Controller
         return $this->render('orders/showOrder.html.twig', [
             'order' => $order
         ]);
+    }
+
+    /**
+     * @Route("/get_car", name="get_free_car")
+     */
+    public function getFreeCar()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $cars = $em->getRepository('AppBundle:CarAdmin')
+            ->getFreeCars();
+
+        return $this->render('orders/getFreeCar.html.twig', array(
+            'get_cars' => $cars,
+        ));
+    }
+
+
+    /**
+     * @Route("/new_order/{carName}/{ordId}", name="newOrder")
+     */
+    public function getFreeCarNewOrder(Request $request, $carName, $ordId)
+    {
+
+
+        $form = $this->createForm(OrderFormType::class);
+        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+
+        //============   Get choos Car Id AND Car Name =====
+        $order_car_name = $em->getRepository('AppBundle:CarAdmin')
+            ->findOneBy(['carName' => $carName]);
+
+        $change_status = $em->getRepository('AppBundle:Orders')
+            ->findOneBy(['id' => $ordId]);
+        $change_status->setStatus('call');
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $carId = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+
+
+            $em->persist($carId);
+            $em->persist($change_status);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                sprintf('Order created - you (%s) -  Successful', $this->getUser()->getEmail())
+            );
+            return $this->redirectToRoute('get_free_car');
+        }
+
+
+
+        return $this->render('orders/newOrder.html.twig', [
+            'orderForm' => $form->createView(),
+            'order_car_name' => $order_car_name,
+
+        ]);
+
     }
 
 }

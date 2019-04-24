@@ -2,6 +2,9 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\CarAdmin;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * CarAdminRepository
  *
@@ -10,4 +13,29 @@ namespace AppBundle\Repository;
  */
 class CarAdminRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return CarAdmin[]|ArrayCollection
+     */
+    public function getFreeCars(): array
+    {
+        return $this->createQueryBuilder('carAdmin')
+            ->select('carAdmin.carName', 'carId.status', 'user.username', 'carId.id')
+            ->join('carAdmin.driverId', 'user')
+            ->leftJoin('carAdmin.carId', 'carId')
+            ->where('carId.status = :status')
+            ->setParameter('status', 'finished')
+            ->orderBy('carAdmin.carName', 'ASC')
+            ->getQuery()
+            ->execute();
+    }
+
+    public function getCar()
+    {
+        return $this->createQueryBuilder('carAdmin')
+            ->leftJoin('carAdmin.carId', 'carId')
+            ->where('carId.status = :status')
+            ->setParameter('status', 'finished')
+            ->orderBy('carAdmin.carName', 'ASC');
+    }
+
 }
