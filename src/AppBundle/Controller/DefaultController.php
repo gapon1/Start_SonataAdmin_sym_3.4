@@ -28,11 +28,8 @@ class DefaultController extends Controller
     {
         return $this->render('main/contact.html.twig');
     }
-    /**
-     * @Route("/error", name="errorPage")
-     */
-    public function errorAction()
-    {
-        return $this->render('main/404.html.twig');
-    }
+
+
+
+
 }
