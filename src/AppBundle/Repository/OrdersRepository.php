@@ -3,7 +3,6 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * OrdersRepository
@@ -26,15 +25,11 @@ class OrdersRepository extends EntityRepository
 
     public function findDriverOrders()
     {
-        $session = new Session();
-        $userId = $session->get('UserInfo');
 
         return $this->createQueryBuilder('orders')
             ->select('orders.status', 'car.carName', 'orders.id', 'orders.fromAddress', 'orders.toAddress')
             ->join('orders.userOrder', 'user')
             ->join('orders.car', 'car')
-            ->where('orders.driver_id = :uId')
-            ->setParameter('uId', $userId)
             ->orderBy('orders.id', 'ASC')
             ->getQuery()
             ->execute();

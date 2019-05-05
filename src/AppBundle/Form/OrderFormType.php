@@ -4,8 +4,6 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\CarAdmin;
 use AppBundle\Repository\CarAdminRepository;
-use AppBundle\Repository\UserRepository;
-use Application\Sonata\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -33,13 +31,7 @@ class OrderFormType extends AbstractType
             ->add('driverIdOrd', HiddenType::class, [
                 'data' => 1
             ])
-//           ->add('userOrder', EntityType::class, [
-//                'label' => 'Your Email',
-//                'class' => User::class,
-//                'query_builder' => function (UserRepository $repository) {
-//                    return $repository->getUserId();
-//                }
-//            ])
+
             ->add('car', EntityType::class, [
                 'placeholder' => 'Choose car',
                 'class' => CarAdmin::class,
