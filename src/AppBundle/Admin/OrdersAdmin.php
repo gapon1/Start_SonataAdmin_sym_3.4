@@ -31,7 +31,6 @@ final class OrdersAdmin extends AbstractAdmin
             ->add('fromAddress')
             ->add('toAddress')
             ->add('status')
-            ->add('DriverIdOrd')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -44,12 +43,14 @@ final class OrdersAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper): void
     {
+
         $formMapper
             ->add('date')
             ->add('fromAddress')
             ->add('toAddress')
             ->add('status')
-
+            ->add('driverIdOrd')
+            ->add('car')
         ;
     }
 
@@ -63,4 +64,5 @@ final class OrdersAdmin extends AbstractAdmin
             ->add('status')
         ;
     }
+
 }

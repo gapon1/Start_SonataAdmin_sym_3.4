@@ -26,27 +26,27 @@ class Orders
     private $date;
 
     /**
-     * @ORM\Column(type="string")
      * @ORM\OneToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="driver_id", referencedColumnName="id"))
+     * @ORM\JoinColumn(name="driver_id", referencedColumnName="id")
      */
-    private $driver_id;
+    private $driverIdOrd;
 
     /**
      * @return mixed
      */
     public function getDriverIdOrd()
     {
-        return $this->driver_id;
+        return $this->driverIdOrd;
     }
 
     /**
-     * @param mixed $driver_id
+     * @param mixed $driverIdOrd
      */
-    public function setDriverIdOrd($driver_id)
+    public function setDriverIdOrd($driverIdOrd): void
     {
-        $this->driver_id = $driver_id;
+        $this->driverIdOrd = $driverIdOrd;
     }
+
 
     /**
      * @Assert\NotBlank()
