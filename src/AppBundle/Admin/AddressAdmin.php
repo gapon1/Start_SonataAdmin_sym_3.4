@@ -50,7 +50,6 @@ class AddressAdmin extends AbstractAdmin
     {
 
         $formMapper
-            ->add('id')
             ->add('createdAt')
             ->add('updateadAt')
             ->add('profile')
@@ -58,6 +57,19 @@ class AddressAdmin extends AbstractAdmin
             ->add('name')
             ->add('address')
             ->add('totalArea')
+            ->add('floor')
+            ->add('houseFloor')
+            ->add('cop')
+            ->add('rentalRate')
+            ->add('rentalM')
+            ->add('nds')
+            ->add('totalPayment')
+            ->add('contactPerson')
+            ->add('percent')
+            ->add('description')
+            ->add('image')
+            ->add('state')
+            ->add('comment')
         ;
     }
 
