@@ -14,6 +14,10 @@
         <source xml:lang="en">Orders</source>
         <target xml:lang="ru">Аддреса</target>
       </trans-unit>
+      <trans-unit id="address">
+        <source xml:lang="en">Address</source>
+        <target xml:lang="ru">Аддреса</target>
+      </trans-unit>
       <trans-unit id="admin">
         <source xml:lang="en">admin</source>
         <target xml:lang="ru">Управление</target>
