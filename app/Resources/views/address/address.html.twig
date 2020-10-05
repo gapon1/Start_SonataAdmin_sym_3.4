@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block title %} Taxo Park All Orders {% endblock %}
+
+{% block body %}
+
+    <h2 class="genus-name">Address List</h2>
+    <div class="container-fluid">
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Дата ввода</th>
+                <th>Дата обновления</th>
+                <th>Профиль</th>
+                <th>Район</th>
+                <th>Название</th>
+                <th>Аддресс</th>
+                <th>Площадь</th>
+                <th>Этаж</th>
+                <th>Этажность</th>
+                <th>КОП</th>
+                <th>Арендная ставка / m2</th>
+                <th>Аренда / m2</th>
+                <th>НДС</th>
+                <th>Общий платеж</th>
+                <th>Контакт</th>
+                <th>%</th>
+                <th>Описание</th>
+                <th>Фото</th>
+                <th>Состояние</th>
+                <th>Коментарий</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for address in addresses %}
+                <tr>
+                    <td>{{ address.createdAt|date('Y-m-d') }}</td>
+                    <td>{{ address.updateadAt|date('Y-m-d') }}</td>
+                    <td>{{ address.profile }}</td>
+                    <td>{{ address.cityArea }}</td>
+                    <td>{{ address.name }}</td>
+                    <td>{{ address.address }}</td>
+                    <td>{{ address.totalArea }}</td>
+                    <td>{{ address.floor }}</td>
+                    <td>{{ address.houseFloor }}</td>
+                    <td>{{ address.cop }}</td>
+                    <td>{{ address.rentalRate }}</td>
+                    <td>{{ address.rentalM }}</td>
+                    <td>{{ address.nds }}</td>
+                    <td>{{ address.totalPayment }}</td>
+                    <td>{{ address.contactPerson }}</td>
+                    <td>{{ address.percent }}</td>
+                    <td>{{ address.description }}</td>
+                    <td>{{ address.image }}</td>
+                    <td>{{ address.state }}</td>
+                    <td>{{ address.comment }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <br/>
+    <div class="pagination text-center">
+        {{ knp_pagination_render(addresses) }}
+    </div>
+
+{% endblock %}
