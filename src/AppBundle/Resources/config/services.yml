@@ -6,6 +6,13 @@ services:
 #            - { name: sonata.admin, manager_type: orm, group: admin, label: CarAdmin }
 #        public: true
 
+    app.admin.address:
+        class: AppBundle\Admin\AddressAdmin
+        arguments: [~, AppBundle\Entity\Address, Sonata\AdminBundle\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Address }
+        public: true
+
     app.admin.orders:
         class: AppBundle\Admin\OrdersAdmin
         arguments: [~, AppBundle\Entity\Orders, Sonata\AdminBundle\Controller\CRUDController]
