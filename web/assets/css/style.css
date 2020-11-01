@@ -60,10 +60,6 @@ img.max-img {
     height: auto;
 }
 
-.row {
-    margin-bottom: 30px;
-}
-
 header .cbp-af-header .row {
     margin-bottom: 0;
 }
@@ -2602,9 +2598,26 @@ img.alignright {
 
 
 }
-
+.vl {
+    border-left: 1px solid lightgrey;
+    height: 70px;
+    padding: 0 10px;
+}
+#example_wrapper{
+    overflow: scroll;
+    margin-bottom: 50px;
+}
+#custom-filter{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.form-control-sm{
+    width: 100px;
+}
 input[type=search]{
   border: 1px solid #ced4da;
+    margin-right: 10px;
 }
  input[type=search]:focus {
 . color: #495057;
@@ -2612,4 +2625,20 @@ input[type=search]{
     border-color: #80bdff;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+input[type=number]{
+    border: 1px solid #ced4da;
+    margin-right: 10px;
+}
+input[type=number]:focus {
+. color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+img.admin-preview {
+    max-height: 200px;
+    max-width: 200px;
 }

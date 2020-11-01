@@ -4,6 +4,29 @@
 {% block body %}
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <table id="custom-filter" border="0" cellspacing="5" cellpadding="5">
+        <tbody>
+        <tr>
+            <td>Площадь:</td>
+            <td><input class="form-control form-control-sm test" placeholder="ОТ" type="number" id="min" name="min"></td>
+            <td><input class="form-control form-control-sm" placeholder="ДО" type="number" id="max" name="max"></td>
+            <td class="vl">Этажность:</td>
+            <td><input class="form-control form-control-sm" placeholder="ОТ" type="number" id="min1" name="min1"></td>
+            <td><input class="form-control form-control-sm" placeholder="ДО" type="number" id="max1" name="max1"></td>
+            <td class="vl">Арендная ставка:</td>
+            <td><input class="form-control form-control-sm" placeholder="ОТ" type="number" id="min2" name="min"></td>
+            <td><input class="form-control form-control-sm" placeholder="ДО" type="number" id="max2" name="max"></td>
+            <td class="vl">Ежемесячный платеж:</td>
+            <td><input class="form-control form-control-sm" placeholder="ОТ" type="number" id="min3" name="min"></td>
+            <td><input class="form-control form-control-sm" placeholder="ДО" type="number" id="max3" name="max"></td>
+        </tr>
+        <tr>
+
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
         <tr>
@@ -54,7 +77,32 @@
                 <td>{{ address.state }}</td>
                 <td>{{ address.comment }}</td>
             </tr>
+
         {% endfor %}
+        <tfoot>
+        <tr>
+            <th>Дата ввода</th>
+            <th>Дата обновления</th>
+            <th>Профиль</th>
+            <th>Район</th>
+            <th>Название</th>
+            <th>Аддресс</th>
+            <th>Площадь</th>
+            <th>Этаж</th>
+            <th>Этажность</th>
+            <th>КОП</th>
+            <th>Арендная ставка / m2</th>
+            <th>Аренда / m2</th>
+            <th>НДС</th>
+            <th>Общий платеж</th>
+            <th>Контакт</th>
+            <th>%</th>
+            <th>Описание</th>
+            <th>Фото</th>
+            <th>Состояние</th>
+            <th>Коментарий</th>
+        </tr>
+        </tfoot>
         </tbody>
     </table>
 
@@ -62,6 +110,26 @@
         $(document).ready(function () {
             $('#example').DataTable(
                 {
+                    initComplete: function () {
+                        this.api().columns().every(function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        });
+                    },
                     "language": {
                         "lengthMenu": "Отображать _MENU_  записей на странице",
                         "zeroRecords": "Ничего не найдено - извините",
@@ -89,6 +157,39 @@
                     cbs[i].checked = bx.checked;
                 }
             }
+        }
+
+        sortingBetween('#min', '#max', 6);
+        sortingBetween('#min1', '#max1', 8);
+        sortingBetween('#min2', '#max2', 10);
+        sortingBetween('#min3', '#max3', 13);
+
+        $(document).ready(function () {
+            var table = $('#example').DataTable();
+            // Event listener to the two range filtering inputs to redraw on input
+            $('#max, #max1, #max2, #max3, #min, #min1, #min2, #min3').change(function () {
+                table.draw();
+            });
+        });
+
+        function sortingBetween(idMin, IdMax, number) {
+            /* Custom filtering function which will search data in column four between two values */
+            $.fn.dataTable.ext.search.push(
+                function (settings, data, dataIndex) {
+                    var min = parseInt($(idMin).val(), 10);
+                    var max = parseInt($(IdMax).val(), 10);
+                    var totalArea = parseFloat(data[number]) || 0; // use data for the age column
+
+                    if ((isNaN(min) && isNaN(max)) ||
+                        (isNaN(min) && totalArea <= max) ||
+                        (min <= totalArea && isNaN(max)) ||
+                        (min <= totalArea && totalArea <= max)) {
+                        return true;
+                    }
+
+                    return false;
+                }
+            );
         }
     </script>
 
