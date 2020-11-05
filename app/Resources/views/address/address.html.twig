@@ -30,7 +30,7 @@
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
         <tr>
-            <th>Дата ввода</th>
+{#            <th>Дата ввода</th>#}
             <th>Дата обновления</th>
             <th>Профиль</th>
             <th>Район</th>
@@ -42,10 +42,10 @@
             <th>КОП</th>
             <th>Арендная ставка / m2</th>
             <th>Аренда / m2</th>
-            <th>НДС</th>
+{#            <th>НДС</th>#}
             <th>Общий платеж</th>
             <th>Контакт</th>
-            <th>%</th>
+{#            <th>%</th>#}
             <th>Описание</th>
             <th>Фото</th>
             <th>Состояние</th>
@@ -56,7 +56,7 @@
         <tbody class="searchable">
         {% for address in addresses %}
             <tr>
-                <td>{{ address.createdAt|date('Y-m-d') }}</td>
+{#                <td>{{ address.createdAt|date('Y-m-d') }}</td>#}
                 <td>{{ address.updateadAt|date('Y-m-d') }}</td>
                 <td>{{ address.profile }}</td>
                 <td>{{ address.cityArea }}</td>
@@ -68,10 +68,10 @@
                 <td>{{ address.cop }}</td>
                 <td>{{ address.rentalRate }}</td>
                 <td>{{ address.rentalM }}</td>
-                <td>{{ address.nds }}</td>
+{#                <td>{{ address.nds }}</td>#}
                 <td>{{ address.totalPayment }}</td>
                 <td>{{ address.contactPerson }}</td>
-                <td>{{ address.percent }}</td>
+{#                <td>{{ address.percent }}</td>#}
                 <td>{{ address.description }}</td>
                 <td>{{ address.image }}</td>
                 <td>{{ address.state }}</td>
@@ -81,7 +81,7 @@
         {% endfor %}
         <tfoot>
         <tr>
-            <th>Дата ввода</th>
+{#            <th>Дата ввода</th>#}
             <th>Дата обновления</th>
             <th>Профиль</th>
             <th>Район</th>
@@ -93,10 +93,10 @@
             <th>КОП</th>
             <th>Арендная ставка / m2</th>
             <th>Аренда / m2</th>
-            <th>НДС</th>
+{#            <th>НДС</th>#}
             <th>Общий платеж</th>
             <th>Контакт</th>
-            <th>%</th>
+{#            <th>%</th>#}
             <th>Описание</th>
             <th>Фото</th>
             <th>Состояние</th>
