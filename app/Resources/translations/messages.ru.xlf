@@ -12,7 +12,7 @@
       </trans-unit>
       <trans-unit id="orders">
         <source xml:lang="en">Orders</source>
-        <target xml:lang="ru">Аддреса</target>
+        <target xml:lang="ru">Заказы</target>
       </trans-unit>
       <trans-unit id="address">
         <source xml:lang="en">Address</source>
