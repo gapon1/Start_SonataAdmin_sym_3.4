@@ -17,10 +17,20 @@ final class OrdersAdmin extends AbstractAdmin
         $datagridMapper
             ->add('id')
             ->add('date')
-            ->add('fromAddress')
-            ->add('toAddress')
+            ->add('profile')
+            ->add('address')
+            ->add('district')
             ->add('status')
-        ;
+            ->add('name')
+            ->add('complexName')
+            ->add('totalArea')
+            ->add('floor')
+            ->add('flooring')
+            ->add('priceM')
+            ->add('totalPrice')
+            ->add('photo')
+            ->add('description')
+            ->add('comments');
     }
 
     protected function configureListFields(ListMapper $listMapper): void
@@ -28,17 +38,24 @@ final class OrdersAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('date')
-            ->add('fromAddress')
-            ->add('toAddress')
+            ->add('profile')
+            ->add('address')
+            ->add('district')
             ->add('status')
-            ->add('_action', null, [
-                'actions' => [
-                    'show' => [],
-                    'edit' => [],
-                    'delete' => [],
-                ],
-            ])
-        ;
+            ->add('name')
+            ->add('complexName')
+            ->add('totalArea')
+            ->add(
+                '_action',
+                null,
+                [
+                    'actions' => [
+                        'show' => [],
+                        'edit' => [],
+                        'delete' => [],
+                    ],
+                ]
+            );
     }
 
     protected function configureFormFields(FormMapper $formMapper): void
@@ -46,12 +63,21 @@ final class OrdersAdmin extends AbstractAdmin
 
         $formMapper
             ->add('date')
-            ->add('fromAddress')
-            ->add('toAddress')
+            ->add('address')
+            ->add('profile')
+            ->add('district')
             ->add('status')
             ->add('driverIdOrd')
-            ->add('car')
-        ;
+            ->add('name')
+            ->add('complexName')
+            ->add('totalArea')
+            ->add('floor')
+            ->add('flooring')
+            ->add('priceM')
+            ->add('totalPrice')
+            ->add('photo')
+            ->add('description')
+            ->add('comments');
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void
@@ -59,10 +85,20 @@ final class OrdersAdmin extends AbstractAdmin
         $showMapper
             ->add('id')
             ->add('date')
-            ->add('fromAddress')
-            ->add('toAddress')
+            ->add('profile')
+            ->add('address')
+            ->add('district')
             ->add('status')
-        ;
+            ->add('name')
+            ->add('complexName')
+            ->add('totalArea')
+            ->add('floor')
+            ->add('flooring')
+            ->add('priceM')
+            ->add('totalPrice')
+            ->add('photo')
+            ->add('description')
+            ->add('comments');
     }
 
 }

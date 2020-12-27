@@ -25,6 +25,7 @@ class Orders
      */
     private $date;
 
+
     /**
      * @ORM\OneToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="driver_id", referencedColumnName="id")
@@ -88,7 +89,7 @@ class Orders
         return $this->userOrder;
     }
 
-    public function setUserOrder(User $userOrder):self
+    public function setUserOrder(User $userOrder): self
     {
         $this->setUserOrder($userOrder);
 
@@ -98,12 +99,63 @@ class Orders
     /**
      * @ORM\Column(type="string")
      */
-    private $fromAddress;
+    private $address;
 
     /**
      * @ORM\Column(type="string")
      */
-    private $toAddress;
+    private $profile;
+
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    public function setProfile($profile): self
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $name;
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function setTotalArea($totalArea): self
+    {
+        $this->totalArea = $totalArea;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $complexName;
+
+    public function getComplexName()
+    {
+        return $this->complexName;
+    }
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $district;
 
     /**
      * @ORM\Column(type="string")
@@ -111,11 +163,154 @@ class Orders
     private $status;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $totalArea;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $floor;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $flooring;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $priceM;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $totalPrice;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $photo;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $comments;
+
+    public function getTotalArea()
+    {
+        return $this->totalArea;
+    }
+
+    public function getFloor()
+    {
+        return $this->floor;
+    }
+
+    public function setAddress($address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function setDistrict($district): self
+    {
+        $this->district = $district;
+
+        return $this;
+    }
+
+    public function setFloor($floor): self
+    {
+        $this->floor = $floor;
+
+        return $this;
+    }
+
+    public function setFlooring($flooring): self
+    {
+        $this->flooring = $flooring;
+
+        return $this;
+    }
+
+    public function setPriceM($priceM): self
+    {
+        $this->priceM = $priceM;
+
+        return $this;
+    }
+
+    public function setTotalPrice($totalPrice): self
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function setDescription($description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function setComments($comments): self
+    {
+        $this->comments = $comments;
+
+        return $this;
+    }
+
+    public function getFlooring()
+    {
+        return $this->flooring;
+    }
+
+    public function getPriceM()
+    {
+        return $this->priceM;
+    }
+
+    public function getTotalPrice()
+    {
+        return $this->totalPrice;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
      * @return mixed
      */
-    public function getFromAddress()
+    public function getAddress()
     {
-        return $this->fromAddress;
+        return $this->address;
     }
 
     /**
@@ -127,11 +322,19 @@ class Orders
     }
 
     /**
+     * @param mixed $status
+     */
+    public function setComplexName($complexName): void
+    {
+        $this->complexName = $complexName;
+    }
+
+    /**˜
      * @return mixed
      */
-    public function getToAddress()
+    public function getDistrict()
     {
-        return $this->toAddress;
+        return $this->district;
     }
 
     /**
