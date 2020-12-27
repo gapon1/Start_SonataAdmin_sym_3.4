@@ -8,7 +8,8 @@
         <tbody>
         <tr>
             <td>Площадь:</td>
-            <td><input class="form-control form-control-sm test" placeholder="ОТ" type="number" id="min" name="min"></td>
+            <td><input class="form-control form-control-sm test" placeholder="ОТ" type="number" id="min" name="min">
+            </td>
             <td><input class="form-control form-control-sm" placeholder="ДО" type="number" id="max" name="max"></td>
             <td class="vl">Этажность:</td>
             <td><input class="form-control form-control-sm" placeholder="ОТ" type="number" id="min1" name="min1"></td>
@@ -30,24 +31,21 @@
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
         <tr>
-{#            <th>Дата ввода</th>#}
+            {# <th>Дата ввода</th> #}
             <th>Дата обновления</th>
             <th>Профиль</th>
-            <th>Район</th>
-            <th>Название</th>
+            <th>Название комплекса</th>
             <th>Аддресс</th>
+            <th>Район</th>
             <th>Площадь</th>
             <th>Этаж</th>
             <th>Этажность</th>
             <th>КОП</th>
             <th>Арендная ставка / m2</th>
-            <th>Аренда / m2</th>
-{#            <th>НДС</th>#}
-            <th>Общий платеж</th>
+            <th>Общий ежемесячный платеж</th>
             <th>Контакт</th>
-{#            <th>%</th>#}
-            <th>Описание</th>
             <th>Фото</th>
+            <th>Описание</th>
             <th>Состояние</th>
             <th>Коментарий</th>
         </tr>
@@ -56,49 +54,42 @@
         <tbody class="searchable">
         {% for address in addresses %}
             <tr>
-{#                <td>{{ address.createdAt|date('Y-m-d') }}</td>#}
                 <td>{{ address.updateadAt|date('Y-m-d') }}</td>
                 <td>{{ address.profile }}</td>
-                <td>{{ address.cityArea }}</td>
                 <td>{{ address.name }}</td>
                 <td>{{ address.address }}</td>
+                <td>{{ address.cityArea }}</td>
                 <td>{{ address.totalArea }}</td>
                 <td>{{ address.floor }}</td>
                 <td>{{ address.houseFloor }}</td>
                 <td>{{ address.cop }}</td>
                 <td>{{ address.rentalRate }}</td>
-                <td>{{ address.rentalM }}</td>
-{#                <td>{{ address.nds }}</td>#}
                 <td>{{ address.totalPayment }}</td>
                 <td>{{ address.contactPerson }}</td>
-{#                <td>{{ address.percent }}</td>#}
-                <td>{{ address.description }}</td>
                 <td>{{ address.image }}</td>
+                <td>{{ address.description }}</td>
                 <td>{{ address.state }}</td>
-                <td>{{ address.comment }}</td>
+                <td data-toggle="modal" data-target="#objectID-{{ address.id }}"><b
+                            class="comment_row">{{ address.comment }}</b></td>
             </tr>
 
         {% endfor %}
         <tfoot>
         <tr>
-{#            <th>Дата ввода</th>#}
             <th>Дата обновления</th>
             <th>Профиль</th>
-            <th>Район</th>
-            <th>Название</th>
+            <th>Название комплекса</th>
             <th>Аддресс</th>
+            <th>Район</th>
             <th>Площадь</th>
             <th>Этаж</th>
             <th>Этажность</th>
             <th>КОП</th>
             <th>Арендная ставка / m2</th>
-            <th>Аренда / m2</th>
-{#            <th>НДС</th>#}
-            <th>Общий платеж</th>
+            <th>Общий ежемесячный платеж</th>
             <th>Контакт</th>
-{#            <th>%</th>#}
-            <th>Описание</th>
             <th>Фото</th>
+            <th>Описание</th>
             <th>Состояние</th>
             <th>Коментарий</th>
         </tr>
@@ -159,10 +150,10 @@
             }
         }
 
-        sortingBetween('#min', '#max', 6);
-        sortingBetween('#min1', '#max1', 8);
-        sortingBetween('#min2', '#max2', 10);
-        sortingBetween('#min3', '#max3', 13);
+        sortingBetween('#min', '#max', 5);
+        sortingBetween('#min1', '#max1', 7);
+        sortingBetween('#min2', '#max2', 9);
+        sortingBetween('#min3', '#max3', 10);
 
         $(document).ready(function () {
             var table = $('#example').DataTable();
@@ -191,6 +182,37 @@
                 }
             );
         }
+
     </script>
+    {# ===============   Modal window ============= #}
+    {% for address in addresses %}
+        <!-- Modal -->
+        <div class="modal fade" id="objectID-{{ address.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Править коментарий</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <form method="post" action="{{ path('editComment', {'id': address.id}) }}">
+                            <textarea name="comment" style="width: 100%">{{ address.comment }}</textarea>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </form>
+                            {% else %}
+                                <p>{{ address.comment }}</p>
+                            {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 
 {% endblock %}

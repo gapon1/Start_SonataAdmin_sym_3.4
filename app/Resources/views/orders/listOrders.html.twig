@@ -10,16 +10,16 @@
     <table id="custom-filter" border="0" cellspacing="5" cellpadding="5">
         <tbody>
         <tr>
-            <td>Площадь:</td>
+            <td>Общая площадь:</td>
             <td><input class="form-control form-control-sm test" placeholder="ОТ" type="number" id="min" name="min"></td>
             <td><input class="form-control form-control-sm" placeholder="ДО" type="number" id="max" name="max"></td>
             <td class="vl">Этажность:</td>
             <td><input class="form-control form-control-sm" placeholder="ОТ" type="number" id="min1" name="min1"></td>
             <td><input class="form-control form-control-sm" placeholder="ДО" type="number" id="max1" name="max1"></td>
-            <td class="vl">Арендная ставка:</td>
+            <td class="vl">Общая стоимость:</td>
             <td><input class="form-control form-control-sm" placeholder="ОТ" type="number" id="min2" name="min"></td>
             <td><input class="form-control form-control-sm" placeholder="ДО" type="number" id="max2" name="max"></td>
-            <td class="vl">Ежемесячный платеж:</td>
+            <td class="vl">Цена / m2:</td>
             <td><input class="form-control form-control-sm" placeholder="ОТ" type="number" id="min3" name="min"></td>
             <td><input class="form-control form-control-sm" placeholder="ДО" type="number" id="max3" name="max"></td>
         </tr>
@@ -70,7 +70,8 @@
                 <td>{{ order.photo }}</td>
                 <td>{{ order.description }}</td>
                 <td>ZA</td>
-                <td>{{ order.comments }}</td>
+                <td data-toggle="modal" data-target="#objectID-{{ order.id }}"><b
+                            class="comment_row">{{ order.comments }}</b></td>
             </tr>
         {% endfor %}
         <tfoot>
@@ -153,7 +154,7 @@
         sortingBetween('#min', '#max', 6);
         sortingBetween('#min1', '#max1', 8);
         sortingBetween('#min2', '#max2', 10);
-        sortingBetween('#min3', '#max3', 13);
+        sortingBetween('#min3', '#max3', 9);
 
         $(document).ready(function () {
             var table = $('#example').DataTable();
@@ -183,6 +184,37 @@
             );
         }
     </script>
+
+    {# ===============   Modal window ============= #}
+    {% for address in orders %}
+        <!-- Modal -->
+{#        <div class="modal fade" id="objectID-{{ address.id }}" tabindex="-1" role="dialog"#}
+{#             aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#            <div class="modal-dialog" role="document">#}
+{#                <div class="modal-content">#}
+{#                    <div class="modal-header">#}
+{#                        <h5 class="modal-title" id="exampleModalLabel">Править коментарий</h5>#}
+{#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                            <span aria-hidden="true">&times;</span>#}
+{#                        </button>#}
+{#                    </div>#}
+{#                    <div class="modal-body">#}
+{#                        {% if is_granted('ROLE_ADMIN') %}#}
+{#                            <form method="post" action="{{ path('editComment', {'id': address.id}) }}">#}
+{#                                <textarea name="comment" style="width: 100%">{{ address.comments }}</textarea>#}
+{#                                <div class="modal-footer">#}
+{#                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>#}
+{#                                    <button type="submit" class="btn btn-primary">Сохранить</button>#}
+{#                                </div>#}
+{#                            </form>#}
+{#                        {% else %}#}
+{#                            <p>{{ address.comments }}</p>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+    {% endfor %}
 
 {#    <br/>#}
 {#    <div class="pagination text-center">#}
