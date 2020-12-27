@@ -2642,3 +2642,8 @@ img.admin-preview {
     max-height: 200px;
     max-width: 200px;
 }
+
+.comment_row{
+    color: #0d6aad;
+    cursor: pointer;
+}
