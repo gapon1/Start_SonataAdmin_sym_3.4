@@ -189,7 +189,7 @@ class Address
      * @var File|UploadedFile
      *
      *
-     * @ORM\Column(name="image", type="blob", nullable=true)
+     * @ORM\Column(name="image", type="blob", nullable=false)
      */
     private $image;
 
