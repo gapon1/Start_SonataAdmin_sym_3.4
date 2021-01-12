@@ -45,15 +45,22 @@ services:
         class: AppBundle\Admin\AddressAdmin
         arguments: [~, AppBundle\Entity\Address, Sonata\AdminBundle\Controller\CRUDController]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Аренда }
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Объекты }
         public: true
 
-    app.admin.orders:
-        class: AppBundle\Admin\OrdersAdmin
-        arguments: [~, AppBundle\Entity\Orders, Sonata\AdminBundle\Controller\CRUDController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Продажа }
-        public: true
+#    app.admin.orders:
+#        class: AppBundle\Admin\OrdersAdmin
+#        arguments: [~, AppBundle\Entity\Orders, Sonata\AdminBundle\Controller\CRUDController]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: admin, label: Продажа }
+#        public: true
+#
+#    app.admin.archive:
+#        class: AppBundle\Admin\ArchiveAdmin
+#        arguments: [~, AppBundle\Entity\Archive, Sonata\AdminBundle\Controller\CRUDController]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: admin, label: Архив }
+#        public: true
 
     app.form.registration:
         class: AppBundle\Form\RegistrationType

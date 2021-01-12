@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Get free car in Taxi park{% endblock %}
+
+{% block body %}
+
+    <h2>Make Order</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Car</th>
+            <th>Driver</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+
+        {% for car in get_cars %}
+
+            <tr>
+
+                <td>{{ car.address }}</td>
+                <td>{{ car.name }}</td>
+                <td>{{ car.status }}</td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+
+
+{% endblock %}
