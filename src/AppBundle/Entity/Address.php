@@ -2,8 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Repository\AddressRepository;
+use AppBundle\Service\FileUploader;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -24,6 +28,25 @@ class Address
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="object_type", type="string", nullable=true, options={"default" : "Rent"})
+     */
+    private $objectType;
+
+    public function getObjectType(): ?string
+    {
+        return $this->objectType;
+    }
+
+    public function setObjectType(?string $objectType): self
+    {
+        $this->objectType = $objectType;
+
+        return $this;
+    }
 
     /**
      * @var \DateTime
@@ -162,7 +185,12 @@ class Address
      */
     private $description;
 
-
+    /**
+     * @var File|UploadedFile
+     *
+     *
+     * @ORM\Column(name="image", type="blob", nullable=true)
+     */
     private $image;
 
     /**
@@ -601,7 +629,7 @@ class Address
     /**
      * Set image.
      *
-     * @param string $image
+     * @param UploadedFile $image
      *
      * @return Address
      */
@@ -615,7 +643,7 @@ class Address
     /**
      * Get image.
      *
-     * @return string
+     * @return UploadedFile
      */
     public function getImage()
     {
@@ -671,6 +699,8 @@ class Address
     }
 
 
-
+    public function getImagePath(){
+        return '../uploads/uploads/object/';
+    }
 
 }
