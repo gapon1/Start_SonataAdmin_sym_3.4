@@ -38,7 +38,9 @@ class AddressController extends Controller
             ->add('name', TextType::class)
             ->add('phone', TelType::class)
             ->add('email', EmailType::class)
-            ->add('send', SubmitType::class)
+            ->add('send', SubmitType::class, [
+                'label' => 'Отправить'
+            ])
             ->getForm();
 
         $sendForm->handleRequest($request);
@@ -47,7 +49,7 @@ class AddressController extends Controller
             $message = \Swift_Message::newInstance()
                 ->setSubject('Contact Form Submission')
                 ->setFrom($sendForm->getData()['email'])
-                ->setTo('gapon007@ukr.net')
+                ->setTo('vitalii.hapon@gmail.com')
                 ->setBody(
                      'Имя: ' . $sendForm->getData()['name'] . '\n\n'
                     .'Email: ' . $sendForm->getData()['email']. '\n\n'

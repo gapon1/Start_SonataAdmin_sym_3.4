@@ -5,6 +5,10 @@ jQuery(document).ready(function ($) {
     let Id = $(this).attr('id');
     $("#form_id").val(Id)
   })
+
+  $("#form_send").submit(function (){
+    $(this)[0].reset();
+  })
   //END: FROM fill
 
   // make code pretty
