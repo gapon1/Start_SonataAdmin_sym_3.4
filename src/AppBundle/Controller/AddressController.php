@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Address;
 use AppBundle\Form\AddressType;
+use FOS\UserBundle\Mailer\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -29,7 +30,7 @@ class AddressController extends Controller
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 
-        $defaultData = ['message' => 'Type your message here'];
+        $defaultData = ['message' => '<h3>Сообщение с ( brokergma.com ), таблица Аренда</h3>'];
         $sendForm = $this->createFormBuilder($defaultData)
             ->add('id', HiddenType::class, [
                 'data' => '',
@@ -46,27 +47,22 @@ class AddressController extends Controller
         $sendForm->handleRequest($request);
 
         if ($sendForm->isSubmitted() && $sendForm->isValid()) {
-            $myappContactMail = 'am@brokergma.com';
-            $myappContactPassword = '4756Mag1';
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Заявка на аренду')
+                ->setFrom('brokergma@thebroker.website')
+                ->setTo('brokergma@thebroker.website')
+                ->setBody(
+                    $sendForm->getData()['message']. '<br>'.
+                    "Name: " . $sendForm->getData()['name']. '<br>'.
+                    "Phone: " . $sendForm->getData()['phone']. '<br>'.
+                    "Email: " . $sendForm->getData()['email']. '<br>'.
+                    "Id обекта: <b>" . $sendForm->getData()['id'] . '</b>',
+                    'text/html'
+                )
+            ;
 
-            // In this case we'll use the ZOHO mail services.
-            // If your service is another, then read the following article to know which smpt code to use and which port
-            // http://ourcodeworld.com/articles/read/14/swiftmailer-send-mails-from-php-easily-and-effortlessly
-            $transport = \Swift_SmtpTransport::newInstance('smtp.hostinger.com.ua', 465,'ssl')
-                ->setUsername($myappContactMail)
-                ->setPassword($myappContactPassword);
-
-            $mailer = \Swift_Mailer::newInstance($transport);
-
-            $message = \Swift_Message::newInstance("Our Code World Contact Form ".'Subject')
-                ->setFrom(array($myappContactMail => "Message by name"))
-                ->setTo(array(
-                    $myappContactMail => $myappContactMail
-                ))
-                ->setBody("<br>ContactMail :". 'email');
+            $this->get('mailer')->send($message);
             $this->addFlash('success', 'Комментарий успешно изменен!');
-            return $mailer->send($message);
-
         }
 
         return $this->render('address/address.html.twig',

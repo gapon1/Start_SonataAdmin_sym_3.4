@@ -201,7 +201,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {{ form(sendForm, {'attr': {'id': 'form_send'}}) }}
+                        {{ form_start(sendForm, {'attr': {'id': 'form_send'}}) }}
+                        {{ form_errors(sendForm) }}
+                        {{ form_row(sendForm.name) }}
+                        {{ form_row(sendForm.email) }}
+                        {{ form_end(sendForm) }}
                     </div>
                 </div>
             </div>
