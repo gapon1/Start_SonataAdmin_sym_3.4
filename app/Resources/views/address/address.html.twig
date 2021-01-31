@@ -203,6 +203,7 @@
                     <div class="modal-body">
                         {{ form_start(sendForm, {'attr': {'id': 'form_send'}}) }}
                         {{ form_errors(sendForm) }}
+                        {{ form_row(sendForm.id) }}
                         {{ form_row(sendForm.name) }}
                         {{ form_row(sendForm.email) }}
                         {{ form_end(sendForm) }}
