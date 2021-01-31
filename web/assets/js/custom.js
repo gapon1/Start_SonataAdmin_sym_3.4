@@ -3,7 +3,7 @@ jQuery(document).ready(function ($) {
 //  Fill Form Send data
   $(".comment_row").click(function (){
     let Id = $(this).attr('id');
-    $("#form_id").val(Id)
+    $("#application_id").val(Id)
   })
 
   // $("#form_send").submit(function (){
