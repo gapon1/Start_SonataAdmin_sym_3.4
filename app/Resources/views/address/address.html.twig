@@ -40,14 +40,14 @@
             <th>Площадь</th>
             <th>Этаж</th>
             <th>Этажность</th>
-            <th>КОП</th>
+{#            <th>КОП</th>#}
             <th>Арендная ставка / m2</th>
             <th>Общий ежемесячный платеж</th>
             <th>Контакт</th>
             <th>Фото</th>
             <th>Описание</th>
-            <th>Состояние</th>
-            <th>Коментарий</th>
+            <th>Заявка на аренду</th>
+{#            <th>Коментарий</th>#}
         </tr>
         </thead>
 
@@ -62,15 +62,17 @@
                 <td>{{ address.totalArea }}</td>
                 <td>{{ address.floor }}</td>
                 <td>{{ address.houseFloor }}</td>
-                <td>{{ address.cop }}</td>
+{#                <td>{{ address.cop }}</td>#}
                 <td>{{ address.rentalRate }}</td>
                 <td>{{ address.totalPayment }}</td>
                 <td>{{ address.contactPerson }}</td>
                 <td>{{ address.image }}</td>
                 <td>{{ address.description }}</td>
-                <td>{{ address.state }}</td>
-                <td data-toggle="modal" data-target="#objectID-{{ address.id }}"><b
-                            class="comment_row">{{ address.comment }}</b></td>
+                <td data-toggle="modal" data-target="#objectID">
+                    <b class="comment_row" id="{{ address.id }}">{{ address.state }}</b>
+                </td>
+{#                <td data-toggle="modal" data-target="#objectID-{{ address.id }}"><b#}
+{#                            class="comment_row">{{ address.comment }}</b></td>#}
             </tr>
 
         {% endfor %}
@@ -84,14 +86,14 @@
             <th>Площадь</th>
             <th>Этаж</th>
             <th>Этажность</th>
-            <th>КОП</th>
+{#            <th>КОП</th>#}
             <th>Арендная ставка / m2</th>
             <th>Общий ежемесячный платеж</th>
             <th>Контакт</th>
             <th>Фото</th>
             <th>Описание</th>
-            <th>Состояние</th>
-            <th>Коментарий</th>
+            <th>Заявка на аренду</th>
+{#            <th>Коментарий</th>#}
         </tr>
         </tfoot>
         </tbody>
@@ -184,35 +186,25 @@
         }
 
     </script>
+
+
     {# ===============   Modal window ============= #}
-    {% for address in addresses %}
         <!-- Modal -->
-        <div class="modal fade" id="objectID-{{ address.id }}" tabindex="-1" role="dialog"
+        <div class="modal fade" id="objectID" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Править коментарий</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Заявка на аренду</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        {% if is_granted('ROLE_ADMIN') %}
-                        <form method="post" action="{{ path('editComment', {'id': address.id}) }}">
-                            <textarea name="comment" style="width: 100%">{{ address.comment }}</textarea>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
-                            </div>
-                        </form>
-                            {% else %}
-                                <p>{{ address.comment }}</p>
-                            {% endif %}
+                        {{ form(sendForm) }}
                     </div>
                 </div>
             </div>
         </div>
-    {% endfor %}
 
 {% endblock %}

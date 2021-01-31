@@ -4,10 +4,12 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Address;
 use AppBundle\Form\AddressType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,10 +28,43 @@ class AddressController extends Controller
         $address = new Address();
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
+
+        $defaultData = ['message' => 'Type your message here'];
+        $sendForm = $this->createFormBuilder($defaultData)
+            ->add('id', HiddenType::class, [
+                'data' => '',
+                'block_name' => 'send_id',
+            ])
+            ->add('name', TextType::class)
+            ->add('phone', TelType::class)
+            ->add('email', EmailType::class)
+            ->add('send', SubmitType::class)
+            ->getForm();
+
+        $sendForm->handleRequest($request);
+
+        if ($sendForm->isSubmitted() && $sendForm->isValid()) {
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Contact Form Submission')
+                ->setFrom($sendForm->getData()['email'])
+                ->setTo('gapon007@ukr.net')
+                ->setBody(
+                     'Имя: ' . $sendForm->getData()['name'] . '\n\n'
+                    .'Email: ' . $sendForm->getData()['email']. '\n\n'
+                    .'Телефон: ' . $sendForm->getData()['phone']. '\n\n'
+                    .'Id Обекта: ' . $sendForm->getData()['id'],
+                    'text/html'
+                );
+
+            $this->get('mailer')->send($message);
+            $this->addFlash('success', 'Комментарий успешно изменен!');
+        }
+
         return $this->render('address/address.html.twig',
             [
                 'addresses' => $addresses,
-                'formComment' => $form->createView()
+                'formComment' => $form->createView(),
+                'sendForm' => $sendForm->createView()
             ]);
     }
 

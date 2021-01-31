@@ -159,7 +159,7 @@ blockquote {
     border: none;
     page-break-inside: avoid;
 }
-  
+
 fieldset {
   padding: 0;
   margin: 0;
@@ -204,55 +204,55 @@ input[type="color"],
 }
 
 
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-.uneditable-input {
-	font-size: 13px;
-	border:none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
+/*textarea,*/
+/*input[type="text"],*/
+/*input[type="password"],*/
+/*input[type="datetime"],*/
+/*input[type="datetime-local"],*/
+/*input[type="date"],*/
+/*input[type="month"],*/
+/*input[type="time"],*/
+/*input[type="week"],*/
+/*input[type="number"],*/
+/*input[type="email"],*/
+/*input[type="url"],*/
+/*input[type="search"],*/
+/*input[type="tel"],*/
+/*input[type="color"],*/
+/*.uneditable-input {*/
+/*	font-size: 13px;*/
+/*	border:none;*/
+/*  -webkit-box-shadow: none;*/
+/*  -moz-box-shadow: none;*/
+/*  box-shadow: none;*/
+/*}*/
 
-textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-.uneditable-input:focus {
-  border-color: none;
-  outline: 0;
-  outline: thin dotted \9;
-  /* IE6-9 */
-  font-size: 13px;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  border: none;
-}
+/*textarea:focus,*/
+/*input[type="text"]:focus,*/
+/*input[type="password"]:focus,*/
+/*input[type="datetime"]:focus,*/
+/*input[type="datetime-local"]:focus,*/
+/*input[type="date"]:focus,*/
+/*input[type="month"]:focus,*/
+/*input[type="time"]:focus,*/
+/*input[type="week"]:focus,*/
+/*input[type="number"]:focus,*/
+/*input[type="email"]:focus,*/
+/*input[type="url"]:focus,*/
+/*input[type="search"]:focus,*/
+/*input[type="tel"]:focus,*/
+/*input[type="color"]:focus,*/
+/*.uneditable-input:focus {*/
+/*  border-color: none;*/
+/*  outline: 0;*/
+/*  outline: thin dotted \9;*/
+/*  !* IE6-9 *!*/
+/*  font-size: 13px;*/
+/*  -webkit-box-shadow: none;*/
+/*  -moz-box-shadow: none;*/
+/*  box-shadow: none;*/
+/*  border: none;*/
+/*}*/
 
 
 .uneditable-input,
