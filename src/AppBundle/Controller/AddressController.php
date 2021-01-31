@@ -62,7 +62,7 @@ class AddressController extends Controller
             ;
 
             $this->get('mailer')->send($message);
-            $this->addFlash('success', 'Комментарий успешно изменен!');
+            $this->addFlash('success', 'Заявка успешно отправлена!');
         }
 
         return $this->render('address/address.html.twig',
