@@ -125,14 +125,6 @@ class AddressAdmin extends AbstractAdmin
             ->add('contactPerson')
             ->add('percent')
             ->add('description')
-            ->add(
-                'image',
-                ImageType::class,
-                [
-                    'allow_file_upload' => $image->getImagePath(),
-                    'data_class' => null,
-                ]
-            )
             ->add('state')
             ->add('comment')
             ->add(
@@ -143,41 +135,41 @@ class AddressAdmin extends AbstractAdmin
                         'Архив' => '0',
                         'Опубликованные' => '1',
                     ),
-                    'required' => true,
+                    'required' => false,
                 ]
             );
     }
 
-    public function prePersist($image)
-    {
-        $this->manageFileUpload($image);
-    }
-
-    public function preUpdate($image)
-    {
-        $this->manageFileUpload($image);
-    }
-
-    private function manageFileUpload($image)
-    {
-
-        $uploads_dir = '../uploads/uploads/object/';
-        foreach ($_FILES as $file) {
-            foreach ($file["error"] as $key => $error) {
-                if ($error == UPLOAD_ERR_OK) {
-                    $tmp_name = $file["tmp_name"][$key];
-                    // basename() может предотвратить атаку на файловую систему;
-                    // может быть целесообразным дополнительно проверить имя файла
-                    $name = basename($file["name"][$key]);
-                    //move_uploaded_file($tmp_name, "$uploads_dir/$name");
-                    move_uploaded_file(
-                        $tmp_name,
-                        $uploads_dir.$name
-                    );
-                }
-            }
-        }
-    }
+//    public function prePersist($image)
+//    {
+//        $this->manageFileUpload($image);
+//    }
+//
+//    public function preUpdate($image)
+//    {
+//        $this->manageFileUpload($image);
+//    }
+//
+//    private function manageFileUpload($image)
+//    {
+//
+//        $uploads_dir = '../uploads/uploads/object/';
+//        foreach ($_FILES as $file) {
+//            foreach ($file["error"] as $key => $error) {
+//                if ($error == UPLOAD_ERR_OK) {
+//                    $tmp_name = $file["tmp_name"][$key];
+//                    // basename() может предотвратить атаку на файловую систему;
+//                    // может быть целесообразным дополнительно проверить имя файла
+//                    $name = basename($file["name"][$key]);
+//                    //move_uploaded_file($tmp_name, "$uploads_dir/$name");
+//                    move_uploaded_file(
+//                        $tmp_name,
+//                        $uploads_dir.$name
+//                    );
+//                }
+//            }
+//        }
+//    }
 
     protected function configureShowFields(ShowMapper $showMapper): void
     {
