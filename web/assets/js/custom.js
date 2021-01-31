@@ -6,9 +6,9 @@ jQuery(document).ready(function ($) {
     $("#form_id").val(Id)
   })
 
-  $("#form_send").submit(function (){
-    $(this)[0].reset();
-  })
+  // $("#form_send").submit(function (){
+  //   $(this)[0].reset();
+  // })
   //END: FROM fill
 
   // make code pretty
