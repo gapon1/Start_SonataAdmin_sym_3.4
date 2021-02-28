@@ -63,15 +63,20 @@ doctrine:
         #path: '%database_path%'
 
     orm:
-        auto_generate_proxy_classes: '%kernel.debug%'
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        auto_generate_proxy_classes: "%kernel.debug%"
+        entity_managers:
+            default:
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                auto_mapping: true
+                mappings:
+                    ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
     host: '%mailer_host%'
-    port: "%mailer_port%"
+#    port: "%mailer_port%"
     username: '%mailer_user%'
     password: "%mailer_password%"
     spool: { type: memory }
@@ -140,3 +145,39 @@ fos_user:
     from_email:
         address: "noreply@yourcompany.com"
         sender_name: "No Reply"
+
+sonata_media:
+    # if you don't use default namespace configuration
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr it is mandatory to choose one here
+#    class:
+#        media: Application\Sonata\MediaBundle\Entity\Media
+#        gallery: Application\Sonata\MediaBundle\Entity\Gallery
+#        gallery_has_media: Application\Sonata\MediaBundle\Entity\GalleryHasMedia
+    default_context: default
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                small: { width: 200 , quality: 140 }
+                big:   { width: 500 , quality: 70}
+
+        address: # the default context is mandatory
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 200 , quality: 70 }
+                big: { width: 500 , quality: 70 }
+
+    cdn:
+        server:
+            path: /uploads/media # http://media.sonata-project.org/
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false

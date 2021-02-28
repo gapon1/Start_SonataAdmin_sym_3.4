@@ -2,23 +2,19 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Repository\AddressRepository;
-use AppBundle\Service\FileUploader;
-use Doctrine\ORM\EntityManagerInterface;
+use Application\Sonata\MediaBundle\Entity\Gallery;
+use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Address
- *
+ * @ORM\Entity
  * @ORM\Table(name="entity_address")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AddressRepository")
  */
 class Address
 {
-    const SERVER_PATH_TO_IMAGE_FOLDER = __DIR__ . '/../../../' . 'uploads/uploads/object';
+    const SERVER_PATH_TO_IMAGE_FOLDER = __DIR__ . '/../../../' . 'web/uploads/media';
 
     /**
      * @var int
@@ -186,12 +182,21 @@ class Address
     private $description;
 
     /**
-     * @var File|UploadedFile
-     *
-     *
-     * @ORM\Column(name="image", type="blob", nullable=false)
+     * @var $media
+     * @var Media
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
      */
-    private $image;
+    protected $media;
+
+    /**
+     * @var Gallery
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(name="gallery", referencedColumnName="id")
+     * })
+     */
+    private $gallery;
 
     /**
      * @var string
@@ -627,27 +632,30 @@ class Address
     }
 
     /**
-     * Set image.
-     *
-     * @param UploadedFile $image
-     *
-     * @return Address
+     * @param  $media
      */
-    public function setImage($image)
+    public function setMedia($media)
     {
-        $this->image = $image;
+        $this->media = $media;
+    }
 
-        return $this;
+    public function getMedia()
+    {
+        return $this->media;
     }
 
     /**
-     * Get image.
-     *
-     * @return UploadedFile
+     * @param  $gallery
      */
-    public function getImage()
+    public function setGallery($gallery)
     {
-        return $this->image;
+        $this->gallery = $gallery;
+    }
+
+
+    public function getGallery()
+    {
+        return $this->gallery;
     }
 
     /**
@@ -698,9 +706,8 @@ class Address
         return $this->comment;
     }
 
-
-    public function getImagePath(){
-        return '../uploads/uploads/object/';
+    public function getWebPath()
+    {
+        return self::SERVER_PATH_TO_IMAGE_FOLDER;
     }
-
 }

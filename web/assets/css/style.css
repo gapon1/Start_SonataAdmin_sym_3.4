@@ -2647,3 +2647,7 @@ img.admin-preview {
     color: #0d6aad;
     cursor: pointer;
 }
+
+.media_width{
+    max-width: 300px;
+}

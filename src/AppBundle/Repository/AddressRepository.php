@@ -27,4 +27,17 @@ class AddressRepository extends EntityRepository
             ->execute();
     }
 
+    /**
+     * @return AddressController[]|ArrayCollection
+     */
+    public function getAddressGallery()
+    {
+        return $this->createQueryBuilder('addressGallery')
+            ->select( 'addressGallery.name', 'gallery.id', 'gallery.name')
+            ->join('addressGallery.gallery', 'gallery')
+            ->orderBy('addressGallery.name', 'ASC')
+            ->getQuery()
+            ->execute();
+    }
+
 }

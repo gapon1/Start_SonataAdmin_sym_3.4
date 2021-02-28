@@ -60,6 +60,9 @@ class OrderController extends Controller
         $cars = $em->getRepository('AppBundle:CarAdmin')
             ->getFreeCars();
 
+        dump($cars);
+        die();
+
         return $this->render('orders/getFreeCar.html.twig', array(
             'get_cars' => $cars,
         ));
