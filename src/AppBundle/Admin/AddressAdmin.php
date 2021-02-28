@@ -77,6 +77,7 @@ class AddressAdmin extends AbstractAdmin
             ->add('status')
             ->add('cityArea')
             ->add('name')
+            ->add('media', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
             ->add('address')
             ->add(
                 '_action',
@@ -93,7 +94,6 @@ class AddressAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper): void
     {
-        $image = new Address();
 
         $formMapper
             ->add(
@@ -121,6 +121,14 @@ class AddressAdmin extends AbstractAdmin
             ->add('rentalRate')
             ->add('rentalM')
             ->add('nds')
+            ->add('gallery', 'sonata_type_model_list',
+                array('required' => false),
+                array('link_parameters'   => array('context' => 'address')))
+
+            ->add('media', 'sonata_media_type', array(
+                'provider' => 'sonata.media.provider.image',
+                'context'  => 'default'
+            ))
             ->add('totalPayment')
             ->add('contactPerson')
             ->add('percent')
@@ -140,37 +148,6 @@ class AddressAdmin extends AbstractAdmin
             );
     }
 
-//    public function prePersist($image)
-//    {
-//        $this->manageFileUpload($image);
-//    }
-//
-//    public function preUpdate($image)
-//    {
-//        $this->manageFileUpload($image);
-//    }
-//
-//    private function manageFileUpload($image)
-//    {
-//
-//        $uploads_dir = '../uploads/uploads/object/';
-//        foreach ($_FILES as $file) {
-//            foreach ($file["error"] as $key => $error) {
-//                if ($error == UPLOAD_ERR_OK) {
-//                    $tmp_name = $file["tmp_name"][$key];
-//                    // basename() может предотвратить атаку на файловую систему;
-//                    // может быть целесообразным дополнительно проверить имя файла
-//                    $name = basename($file["name"][$key]);
-//                    //move_uploaded_file($tmp_name, "$uploads_dir/$name");
-//                    move_uploaded_file(
-//                        $tmp_name,
-//                        $uploads_dir.$name
-//                    );
-//                }
-//            }
-//        }
-//    }
-
     protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
@@ -180,6 +157,8 @@ class AddressAdmin extends AbstractAdmin
             ->add('profile')
             ->add('cityArea')
             ->add('name')
+            ->add('gallery')
+            ->add('media', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
             ->add('address');
     }
 

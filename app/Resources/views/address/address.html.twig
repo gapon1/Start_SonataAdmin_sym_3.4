@@ -31,7 +31,7 @@
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
         <tr>
-            {# <th>Дата ввода</th> #}
+             <th>ID</th>
             <th>Дата обновления</th>
             <th>Профиль</th>
             <th>Название комплекса</th>
@@ -45,6 +45,7 @@
             <th>Общий ежемесячный платеж</th>
             <th>Контакт</th>
             <th>Фото</th>
+{#            <th>Галерея</th>#}
             <th>Описание</th>
             <th>Заявка на аренду</th>
 {#            <th>Коментарий</th>#}
@@ -54,6 +55,7 @@
         <tbody class="searchable">
         {% for address in addresses %}
             <tr>
+                <td>{{ address.id }}</td>
                 <td>{{ address.updateadAt|date('Y-m-d') }}</td>
                 <td>{{ address.profile }}</td>
                 <td>{{ address.name }}</td>
@@ -66,7 +68,12 @@
                 <td>{{ address.rentalRate }}</td>
                 <td>{{ address.totalPayment }}</td>
                 <td>{{ address.contactPerson }}</td>
-                <td>{{ address.image }}</td>
+                <td>{% media address.media, 'small' with {'class': 'media_width'} %}</td>
+{#                <td>#}
+{#                    {% for img in gallery %}#}
+{#                        {% media img.media, 'big' %}#}
+{#                    {% endfor %}#}
+{#                </td>#}
                 <td>{{ address.description }}</td>
                 <td data-toggle="modal" data-target="#objectID">
                     <b class="comment_row" id="{{ address.id }}">{{ address.state }}</b>
@@ -90,7 +97,7 @@
             <th>Арендная ставка / m2</th>
             <th>Общий ежемесячный платеж</th>
             <th>Контакт</th>
-            <th>Фото</th>
+{#            <th>Фото</th>#}
             <th>Описание</th>
             <th>Заявка на аренду</th>
 {#            <th>Коментарий</th>#}

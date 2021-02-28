@@ -5,12 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Address;
 use AppBundle\Form\AddressType;
 use AppBundle\Form\ApplicationType;
+use AppBundle\Service\SetGallery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,6 +20,16 @@ class AddressController extends Controller
         $em = $this->getDoctrine()->getManager();
         $addresses = $em->getRepository('AppBundle:Address')
             ->findAll();
+
+
+        foreach ($addresses as $address){
+            if ($address->getGallery() != null){
+                $galleryId = $address->getGallery()->getId();
+                $repo = $this->getDoctrine()->getRepository('ApplicationSonataMediaBundle:Gallery');
+                $gallery = $repo->find($galleryId);
+                $gallery = $gallery->getGalleryHasMedias();
+            }
+        }
 
 
         $address = new Address();
@@ -57,6 +63,7 @@ class AddressController extends Controller
             'address/address.html.twig',
             [
                 'addresses' => $addresses,
+                'gallery' => $gallery,
                 'formComment' => $form->createView(),
                 'sendForm' => $sendForm->createView(),
             ]
