@@ -162,16 +162,16 @@ sonata_media:
                 - sonata.media.provider.file
 
             formats:
-                small: { width: 200 , quality: 140 }
-                big:   { width: 500 , quality: 70}
+                small: { width: 200 , quality: 90 }
+                big:   { width: 500 , quality: 90}
 
         address: # the default context is mandatory
             providers:
                 - sonata.media.provider.image
 
             formats:
-                small: { width: 200 , quality: 70 }
-                big: { width: 500 , quality: 70 }
+                small: { width: 200 , quality: 90 }
+                big: { width: 500 , quality: 90 }
 
     cdn:
         server:

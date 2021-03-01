@@ -27,7 +27,7 @@ class AddressController extends Controller
                 $galleryId = $address->getGallery()->getId();
                 $repo = $this->getDoctrine()->getRepository('ApplicationSonataMediaBundle:Gallery');
                 $gallery = $repo->find($galleryId);
-                $gallery = $gallery->getGalleryHasMedias();
+                $galleryArray[] = $gallery->getGalleryHasMedias();
             }
         }
 
@@ -63,7 +63,7 @@ class AddressController extends Controller
             'address/address.html.twig',
             [
                 'addresses' => $addresses,
-                'gallery' => $gallery,
+                'gallery' => $galleryArray,
                 'formComment' => $form->createView(),
                 'sendForm' => $sendForm->createView(),
             ]
