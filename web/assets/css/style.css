@@ -2649,7 +2649,8 @@ img.admin-preview {
 }
 
 .media_width{
-    max-width: 300px;
+    cursor: pointer;
+    max-width: 100px;
 }
 .gallery_images img{
     display: none;
@@ -2688,4 +2689,22 @@ img.admin-preview {
 }
 .gallery_slider_modal .modal-body{
     padding: 0!important;
+}
+table.fixed {
+    table-layout: fixed;
+}
+
+tfoot tr th select{
+    max-width: 200px;
+}
+.contact_filter select{
+    max-width: 120px;
+}
+.select2-selection--multiple{
+    width: 130px!important;
+    cursor: pointer;
+    padding-left: 1px;
+}
+.select2-container--default .select2-selection--multiple{
+   border: 1px solid deepskyblue!important;
 }

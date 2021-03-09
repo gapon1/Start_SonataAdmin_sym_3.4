@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Address;
+use AppBundle\Form\AddressType;
+use AppBundle\Form\ApplicationType;
 use AppBundle\Form\OrderFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,22 +18,51 @@ class OrderController extends Controller
     public function listAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $orders = $em->getRepository('AppBundle:Orders')
-            ->findAll();
+        $sellAddresses = $em->getRepository('AppBundle:Address')
+            ->getAddressesForSale();
 
-        /**
-         * @var $paginator
-         */
-        $paginator = $this->get('knp_paginator');
+        foreach ($sellAddresses as $address){
+            if ($address->getGallery() != null){
+                $galleryId = $address->getGallery()->getId();
+                $repo = $this->getDoctrine()->getRepository('ApplicationSonataMediaBundle:Gallery');
+                $gallery = $repo->find($galleryId);
+                $galleryArray[] = $gallery->getGalleryHasMedias();
+            }
+        }
 
-        $result = $paginator->paginate(
-            $orders,
-            $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 3)
-        );
+
+        $address = new Address();
+        $form = $this->createForm(AddressType::class, $address);
+        $form->handleRequest($request);
+
+        $defaultData = ['message' => '<h3>Сообщение с ( brokergma.com ), таблица Аренда</h3>'];
+        $sendForm = $this->createForm(ApplicationType::class, $defaultData);
+
+        $sendForm->handleRequest($request);
+
+        if ($sendForm->isSubmitted() && $sendForm->isValid()) {
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Заявка на аренду')
+                ->setFrom('brokergma@thebroker.website')
+                ->setTo('brokergma@thebroker.website')
+                ->setBody(
+                    $sendForm->getData()['message'].'<br>'.
+                    "Name: ".$sendForm->getData()['name'].'<br>'.
+                    "Phone: ".$sendForm->getData()['phone'].'<br>'.
+                    "Email: ".$sendForm->getData()['email'].'<br>'.
+                    "Id обекта: <b>".$sendForm->getData()['id'].'</b>',
+                    'text/html'
+                );
+
+            $this->get('mailer')->send($message);
+            $this->addFlash('success', 'Заявка успешно отправлена!');
+        }
 
         return $this->render('orders/listOrders.html.twig', [
-            'orders' => $result
+            'orders' => $sellAddresses,
+            'gallery' => $galleryArray,
+            'formComment' => $form->createView(),
+            'sendForm' => $sendForm->createView(),
         ]);
     }
 
