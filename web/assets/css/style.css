@@ -2701,7 +2701,7 @@ tfoot tr th select{
     max-width: 120px;
 }
 .select2-selection--multiple{
-    width: 130px!important;
+    width: 140px!important;
     cursor: pointer;
     padding-left: 1px;
 }
