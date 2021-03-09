@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %} Taxo Park All Orders {% endblock %}
+{% block title %} Brocker Rent  {% endblock %}
 
 {% block body %}
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -40,15 +40,12 @@
             <th>Площадь</th>
             <th>Этаж</th>
             <th>Этажность</th>
-{#            <th>КОП</th>#}
             <th>Арендная ставка / m2</th>
             <th>Общий ежемесячный платеж</th>
             <th>Контакт</th>
-{#            <th>Фото</th>#}
             <th>Галерея</th>
             <th>Описание</th>
             <th>Заявка на аренду</th>
-{#            <th>Коментарий</th>#}
         </tr>
         </thead>
 
@@ -64,33 +61,33 @@
                 <td>{{ address.totalArea }}</td>
                 <td>{{ address.floor }}</td>
                 <td>{{ address.houseFloor }}</td>
-{#                <td>{{ address.cop }}</td>#}
                 <td>{{ address.rentalRate }}</td>
                 <td>{{ address.totalPayment }}</td>
                 <td>{{ address.contactPerson }}</td>
-{#                <td>{% media address.media, 'small' with {'class': 'media_width'} %}</td>#}
                 <td class="gallery_images">
-
-                    {% for imgs in gallery %}
-                        {% if address.gallery ==  imgs.owner.name %}
-                            {% for img in imgs %}
-                                    {% media img.media, 'big' with {'class': 'media_width', 'data-toggle': 'modal', 'data-target':  "#galleryID-"~address.id  } %}
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
+                    {% if address.gallery %}
+                        {% for imgs in gallery %}
+                            {% if address.gallery ==  imgs.owner.name %}
+                                {% for img in imgs %}
+                                        {% media img.media, 'big' with {'class': 'media_width', 'data-toggle': 'modal', 'data-target':  "#galleryID-"~address.id  } %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <img src="{{ asset('assets/img/no_image.png') }}" alt="Empty gallery">
+                    {% endif %}
 
                 </td>
                 <td>{{ address.description }}</td>
                 <td data-toggle="modal" data-target="#objectID">
                     <b class="comment_row" id="{{ address.id }}">{{ address.state }}</b>
                 </td>
-{#                <td data-toggle="modal" data-target="#objectID-{{ address.id }}"><b#}
-{#                            class="comment_row">{{ address.comment }}</b></td>#}
             </tr>
 
         {% endfor %}
         <tfoot>
         <tr>
+            <th>ID</th>
             <th>Дата обновления</th>
             <th>Профиль</th>
             <th>Название комплекса</th>
@@ -99,106 +96,17 @@
             <th>Площадь</th>
             <th>Этаж</th>
             <th>Этажность</th>
-{#            <th>КОП</th>#}
             <th>Арендная ставка / m2</th>
             <th>Общий ежемесячный платеж</th>
             <th>Контакт</th>
-{#            <th>Фото</th>#}
-            <th>Описание</th>
-            <th>Заявка на аренду</th>
-{#            <th>Коментарий</th>#}
+{#            <th>Галерея</th>#}
+{#            <th>Описание</th>#}
+{#            <th>Заявка на аренду</th>#}
         </tr>
         </tfoot>
         </tbody>
     </table>
 
-    <script>
-        $(document).ready(function () {
-            $('#example').DataTable(
-                {
-                    initComplete: function () {
-                        this.api().columns().every(function () {
-                            var column = this;
-                            var select = $('<select><option value=""></option></select>')
-                                .appendTo($(column.footer()).empty())
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
-
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                });
-
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>')
-                            });
-                        });
-                    },
-                    "language": {
-                        "lengthMenu": "Отображать _MENU_  записей на странице",
-                        "zeroRecords": "Ничего не найдено - извините",
-                        "info": "Показано страниц _PAGE_ из _PAGES_",
-                        "infoEmpty": "Нет доступных записей",
-                        "search": "Поиск",
-                        "paginate": {
-                            "previous": 'Предыдущий',
-                            "next": 'Следующий'
-                        },
-                        "infoFiltered": "(Отфильтровано из _MAX_ общее количество записей)"
-                    },
-
-                    "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "Все"]],
-                    "iDisplayLength": 5,
-                }
-            );
-
-        });
-
-        function checkAll(bx) {
-            var cbs = document.getElementsByTagName('input');
-            for (var i = 0; i < cbs.length; i++) {
-                if (cbs[i].type == 'checkbox') {
-                    cbs[i].checked = bx.checked;
-                }
-            }
-        }
-
-        sortingBetween('#min', '#max', 5);
-        sortingBetween('#min1', '#max1', 7);
-        sortingBetween('#min2', '#max2', 9);
-        sortingBetween('#min3', '#max3', 10);
-
-        $(document).ready(function () {
-            var table = $('#example').DataTable();
-            // Event listener to the two range filtering inputs to redraw on input
-            $('#max, #max1, #max2, #max3, #min, #min1, #min2, #min3').change(function () {
-                table.draw();
-            });
-        });
-
-        function sortingBetween(idMin, IdMax, number) {
-            /* Custom filtering function which will search data in column four between two values */
-            $.fn.dataTable.ext.search.push(
-                function (settings, data, dataIndex) {
-                    var min = parseInt($(idMin).val(), 10);
-                    var max = parseInt($(IdMax).val(), 10);
-                    var totalArea = parseFloat(data[number]) || 0; // use data for the age column
-
-                    if ((isNaN(min) && isNaN(max)) ||
-                        (isNaN(min) && totalArea <= max) ||
-                        (min <= totalArea && isNaN(max)) ||
-                        (min <= totalArea && totalArea <= max)) {
-                        return true;
-                    }
-
-                    return false;
-                }
-            );
-        }
-
-    </script>
 
     <div class="container">
 

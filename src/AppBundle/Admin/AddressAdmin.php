@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use AppBundle\Form\Type\ImageType;
 use Sonata\DoctrineORMAdminBundle\Filter\StringFilter;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
 class AddressAdmin extends AbstractAdmin
@@ -78,7 +79,8 @@ class AddressAdmin extends AbstractAdmin
             ->add('cityArea')
             ->add('name')
             ->add('media', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
-            ->add('address')
+            ->add('address', TextType::class, [
+                'header_style' => 'width: 25%'])
             ->add(
                 '_action',
                 null,

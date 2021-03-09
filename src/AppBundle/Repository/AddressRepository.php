@@ -28,14 +28,25 @@ class AddressRepository extends EntityRepository
     }
 
     /**
-     * @return AddressController[]|ArrayCollection
+     * @return int|mixed|string
      */
-    public function getAddressGallery()
+    public function getAddressesForRent()
     {
-        return $this->createQueryBuilder('addressGallery')
-            ->select( 'addressGallery.name', 'gallery.id', 'gallery.name')
-            ->join('addressGallery.gallery', 'gallery')
-            ->orderBy('addressGallery.name', 'ASC')
+        return $this->createQueryBuilder('addressSell')
+            ->where('addressSell.objectType = :objectType')
+            ->setParameter('objectType', 'rent')
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * @return int|mixed|string
+     */
+    public function getAddressesForSale()
+    {
+        return $this->createQueryBuilder('addressSell')
+            ->where('addressSell.objectType = :objectType')
+            ->setParameter('objectType', 'sell')
             ->getQuery()
             ->execute();
     }

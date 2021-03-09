@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Address;
 use AppBundle\Form\AddressType;
 use AppBundle\Form\ApplicationType;
-use AppBundle\Service\SetGallery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +18,7 @@ class AddressController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $addresses = $em->getRepository('AppBundle:Address')
-            ->findAll();
+            ->getAddressesForRent();
 
 
         foreach ($addresses as $address){
