@@ -26,6 +26,63 @@
         <source xml:lang="en">admin</source>
         <target xml:lang="ru">Управление</target>
       </trans-unit>
+      <trans-unit id="object_type">
+        <source xml:lang="en">Object Type</source>
+        <target xml:lang="ru">Тип объекта</target>
+      </trans-unit>
+      <trans-unit id="created_at ">
+         <source xml:lang="en">Created At</source>
+         <target xml:lang="ru">Дата создания</target>
+      </trans-unit>
+      <trans-unit id="updatead_at ">
+        <source xml:lang="en">Updatead At</source>
+        <target xml:lang="ru">Дата обновления</target>
+     </trans-unit>
+     <trans-unit id="object_profile">
+        <source xml:lang="en">Profile</source>
+        <target xml:lang="ru">Профиль объекта</target>
+     </trans-unit>
+    <trans-unit id="city_area">
+        <source xml:lang="en">City Area</source>
+        <target xml:lang="ru">Район города</target>
+    </trans-unit>
+     <trans-unit id="complex_name">
+            <source xml:lang="en">Name</source>
+            <target xml:lang="ru">Название комплекса</target>
+     </trans-unit>
+    <trans-unit id="total_area">
+        <source xml:lang="en">Total Area</source>
+         <target xml:lang="ru">Общая площадь</target>
+    </trans-unit>
+    <trans-unit id="floor">
+         <source xml:lang="en">Floor</source>
+         <target xml:lang="ru">Этаж</target>
+    </trans-unit>
+    <trans-unit id="house_floor">
+         <source xml:lang="en">House Floor</source>
+         <target xml:lang="ru">Этажность дома</target>
+    </trans-unit>
+    <trans-unit id="cop">
+         <source xml:lang="en">Cop</source>
+         <target xml:lang="ru">Арендная ставка / m2</target>
+    </trans-unit>
+
+     <trans-unit id="total_payment">
+          <source xml:lang="en">Total Payment</source>
+          <target xml:lang="ru">Общий ежемесячный платеж</target>
+     </trans-unit>
+     <trans-unit id="contact_person">
+       <source xml:lang="en">Contact Person</source>
+       <target xml:lang="ru">Контактное лицо</target>
+    </trans-unit>
+     <trans-unit id="description">
+        <source xml:lang="en">Description</source>
+        <target xml:lang="ru">Описание</target>
+     </trans-unit>
+     <trans-unit id="status">
+             <source xml:lang="en">Status</source>
+             <target xml:lang="ru">Сатус</target>
+          </trans-unit>
     </body>
   </file>
 </xliff>
