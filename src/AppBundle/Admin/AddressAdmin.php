@@ -5,18 +5,13 @@ declare(strict_types=1);
 
 namespace AppBundle\Admin;
 
-use AppBundle\Controller\AddressController;
-use AppBundle\Entity\Address;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
-use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Sonata\AdminBundle\Show\ShowMapper;
-use AppBundle\Form\Type\ImageType;
-use Sonata\DoctrineORMAdminBundle\Filter\StringFilter;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
@@ -78,7 +73,7 @@ class AddressAdmin extends AbstractAdmin
             ->add('status')
             ->add('cityArea')
             ->add('name')
-            ->add('media', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
+//            ->add('media', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
             ->add('address', TextType::class, [
                 'header_style' => 'width: 25%'])
             ->add(
@@ -106,37 +101,86 @@ class AddressAdmin extends AbstractAdmin
                         'Аренда' => 'rent',
                         'Продажа' => 'sell',
                     ],
-                    'placeholder' => 'Выберите тип объекта',
-                    'required' => true,
+                    'placeholder' => 'Выбрать Тип объекта',
+                    'required' => false,
+                    'empty_data' => 'John Doe',
                 ]
             )
-            ->add('createdAt')
-            ->add('updateadAt')
-            ->add('profile')
-            ->add('cityArea')
+            ->add('createdAt', 'sonata_type_datetime_picker', array(
+                'format' => 'yyyy-MM-dd H:m:s',
+                'widget' => 'single_text',
+            ))
+            ->add('updateadAt', 'sonata_type_datetime_picker', array(
+                'format' => 'yyyy-MM-dd H:m:s',
+                'widget' => 'single_text',
+            ))
+            ->add(
+                'profile',
+                ChoiceFieldMaskType::class,
+                [
+                    'choices' => [
+                        'ЖК' => 'ЖК',
+                        'Дом' => 'Дом',
+                        'Котедж' => 'Котедж',
+                    ],
+                    'placeholder' => 'Выбрать профиль',
+                    'required' => false,
+                    'empty_data' => 'John Doe',
+                ]
+            )
+            ->add(
+                'cityArea',
+                ChoiceFieldMaskType::class,
+                [
+                    'placeholder' => 'Выбрать район',
+                    'choices' => [
+                        'Голосеевский ' => 'Голосеевский',
+                        'Святошинский' => 'Святошинский',
+                        'Соломенский' => 'Соломенский',
+                        'Оболонский' => 'Оболонский',
+                        'Подольский' => 'Подольский',
+                        'Печерский' => 'Печерский',
+                        'Шевченковский' => 'Шевченковский',
+                        'Дарницкий' => 'Дарницкий',
+                        'Днепровский' => 'Днепровский',
+                        'Деснянский' => 'Деснянский',
+                    ],
+                    'required' => false,
+                    'empty_data' => 'John Doe',
+                ]
+            )
             ->add('name')
             ->add('address')
             ->add('totalArea')
             ->add('floor')
             ->add('houseFloor')
             ->add('cop')
-            ->add('rentalRate')
-            ->add('rentalM')
-            ->add('nds')
+//            ->add('rentalRate')
+//            ->add('rentalM')
+//            ->add('nds')
+//            ->add('media', 'sonata_media_type', array(
+//                'provider' => 'sonata.media.provider.image',
+//                'context'  => 'default'
+//            ))
+            ->add('totalPayment')
+            ->add('contactPerson',
+                ChoiceFieldMaskType::class,
+                [
+                    'choices' => [
+                        'Александр' => 'Александр',
+                        'Сергей' => 'Сергей',
+                    ],
+                    'required' => true,
+                ]
+            )
             ->add('gallery', 'sonata_type_model_list',
                 array('required' => false),
-                array('link_parameters'   => array('context' => 'address')))
+                array('link_parameters' => array('context' => 'address')))
 
-            ->add('media', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
-                'context'  => 'default'
-            ))
-            ->add('totalPayment')
-            ->add('contactPerson')
-            ->add('percent')
-            ->add('description')
-            ->add('state')
-            ->add('comment')
+            //            ->add('percent')
+            ->add('description', TextType::class)
+//            ->add('state')
+//            ->add('comment')
             ->add(
                 'status',
                 ChoiceFieldMaskType::class,
@@ -145,7 +189,6 @@ class AddressAdmin extends AbstractAdmin
                         'Архив' => '0',
                         'Опубликованные' => '1',
                     ),
-                    'required' => false,
                 ]
             );
     }
@@ -160,8 +203,19 @@ class AddressAdmin extends AbstractAdmin
             ->add('cityArea')
             ->add('name')
             ->add('gallery')
-            ->add('media', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
+//            ->add('media', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
             ->add('address');
     }
+
+
+
+    // add this method
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        $errorElement
+            ->with('description')
+            ->assertLength(['max' => 200])
+            ->end();
+       }
 
 }

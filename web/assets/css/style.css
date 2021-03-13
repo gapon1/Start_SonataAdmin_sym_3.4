@@ -2695,7 +2695,7 @@ table.fixed {
 }
 
 tfoot tr th select{
-    max-width: 200px;
+    max-width: 100%;
 }
 .contact_filter select{
     max-width: 120px;

@@ -28,7 +28,8 @@ class Address
     /**
      * @var int|null
      *
-     * @ORM\Column(name="object_type", type="string", nullable=true, options={"default" : "Rent"})
+     * @ORM\Column(name="object_type", type="string", nullable=true)
+     *
      */
     private $objectType;
 
@@ -149,7 +150,7 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="nds", type="string", length=255)
+     * @ORM\Column(name="nds", type="string", length=255,  nullable=true)
      */
     private $nds;
 
@@ -170,7 +171,7 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="percent", type="string", length=255)
+     * @ORM\Column(name="percent", type="string", length=255, nullable=true)
      */
     private $percent;
 
@@ -201,14 +202,14 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="state", type="string", length=255)
+     * @ORM\Column(name="state", type="string", length=255, nullable=true)
      */
     private $state;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
 
