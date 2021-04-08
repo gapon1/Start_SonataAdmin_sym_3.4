@@ -7,20 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Clean responsive bootstrap website template">
     <meta name="author" content="">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     {% block stylesheets %}
-
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-        {#<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">#}
+        <!-- bootstrap.min css -->
+        <link rel="stylesheet" href="{{ asset('assets/css/plugin/bootstrap/dist/css/bootstrap.min.css') }}">
+        <!-- Animate.css -->
         <!-- styles -->
         <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700" rel="stylesheet">
-
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/color/default.css') }}" rel="stylesheet">
 
     {% endblock %}
 
@@ -39,13 +33,13 @@
 
 
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class=" navbar-expand-lg navbar-dark bg-dark navbar-inner">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">Broker GMA</a>
             </div>
-        <ul class="nav topnav">
+        <ul class="nav navbar-nav navigation-menu" id="top_menu">
             <li><a href="{{ path('homepage') }}">Home</a></li>
 {#            <li><a href="{{ path('about') }}">About</a></li>#}
 {#            <li><a href="{{ path('contact') }}">Contact</a></li>#}
@@ -72,50 +66,58 @@
             {% endif %}
         </ul>
         </div>
-
     </nav>
 </header>
-<br>
 
 <!-- Content -->
 
-        <div class="col-lg-12">
             {% for msg in app.session.flashBag.get('success') %}
-
                 <div class="alert alert-success">
                     {{ msg }}
                 </div>
             {% endfor %}
             {% block body %}
-
-
             {% endblock %}
-        </div>
-
 
 
 <!-- Footer
 ================================================== -->
-<footer class="footer">
-    <div class="subfooter">
-        <div class="container">
-            <div class="row">
-                <div class="span6">
-                    <p>
-                        &copy; Plato - All right reserved
+<footer id="footer" class="bg-one">
+    <div class="container">
+        <div class="row wow fadeInUp" data-wow-duration="500ms">
+            <div class="col-lg-12">
+                <!-- copyright -->
+                <div class="copyright text-center">
+                    <a href="index.html">
+                        <!-- <img src="images/logo-meghna.png" alt="Meghna" />  -->
+                        <svg width="40px" height="40px" viewBox="0 0 45 44" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Group" transform="translate(2.000000, 2.000000)" stroke="#57CBCC"
+                                   stroke-width="3">
+                                    <ellipse id="Oval" cx="20.5" cy="20" rx="20.5" ry="20"></ellipse>
+                                    <path d="M6,7 L33.5,34.5" id="Line-2" stroke-linecap="square"></path>
+                                    <path d="M21,20 L34,7" id="Line-3" stroke-linecap="square"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                    <br/>
+
+                    <p>Design And Developed by <a href="http://www.themefisher.com">Themefisher.com</a>. Copyright
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        . All Rights Reserved.
                     </p>
                 </div>
-                <div class="span6">
-                    <div class="pull-right">
-                        <div class="credits">
-                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+                <!-- /copyright -->
+
+            </div> <!-- end col lg 12 -->
+        </div> <!-- end row -->
+    </div> <!-- end container -->
+</footer> <!-- end footer -->
 
 
 {% block javascripts %}
