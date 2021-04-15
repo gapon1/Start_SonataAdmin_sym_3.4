@@ -17,6 +17,7 @@
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
     {% endblock %}
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
     <!-- fav and touch icons -->
     <link rel="shortcut icon" href="{{ asset('assets/ico/favicon.ico') }}">
@@ -32,7 +33,7 @@
 <body>
 
 
-<header>
+<header  id="body" >
     <nav class=" navbar-expand-lg navbar-dark bg-dark navbar-inner">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -40,28 +41,32 @@
                 <a class="navbar-brand" href="/">Broker GMA</a>
             </div>
         <ul class="nav navbar-nav navigation-menu" id="top_menu">
-            <li><a href="{{ path('homepage') }}">Home</a></li>
+            <li><a href="{{ path('homepage') }}">Главная</a></li>
 {#            <li><a href="{{ path('about') }}">About</a></li>#}
 {#            <li><a href="{{ path('contact') }}">Contact</a></li>#}
-            {% if is_granted('ROLE_USER') and is_granted('ROLE_ADMIN') %}
-                <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:mainMenu') }} </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:adminMenu') }} </li>
             {% elseif is_granted('ROLE_CUSTOMER') %}
                 <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:customerMenu') }} </li>
-            {% elseif is_granted('ROLE_ADMIN') %}
-                <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:adminMenu') }} </li>
+            {% elseif is_granted('ROLE_USER') %}
+                <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:mainMenu') }} </li>
             {% elseif is_granted('ROLE_DRIVER') %}
                 <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:driverMenu') }} </li>
             {% endif %}
 
             {% if is_granted('ROLE_USER') %}
                 <li class="right">
-                    <a class="login_btn" href="/admin/logout"><i class="fa fa-sign-out"></i>
-                        LogOut</a>
+                    <a class="login_btn" href="/admin/logout"><i class="fa fa-sign-out-alt"></i>
+                        Выйти</a>
                 </li>
             {% else %}
                 <li class="right-side">
                     <a class="login_btn" href="/admin/login"><i class="fa fa-sign-in"></i>
-                        Login</a>
+                        Вход</a>
+                </li>
+                <li class="right-side">
+                    <a class="login_btn" href="/register"><i class="fa fa-user-plus"></i>
+                        Регистрация</a>
                 </li>
             {% endif %}
         </ul>

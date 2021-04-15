@@ -19,11 +19,14 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('username', TextType::class)
+            ->add('username', TextType::class,
+                [
+                    'label' => 'Имя',
+                ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Пароль'],
+                'second_options' => ['label' => 'Повторить пароль'],
             ])
             ->add('enabled', HiddenType::class,
                 [
