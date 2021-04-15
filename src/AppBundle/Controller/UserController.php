@@ -34,7 +34,7 @@ class UserController extends Controller
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('/admin/login');
+            return $this->redirect('/admin/login');
         }
 
         return $this->render(

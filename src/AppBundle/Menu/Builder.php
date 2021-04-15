@@ -13,11 +13,20 @@ class Builder implements ContainerAwareInterface
     {
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
+        $menu->addChild('Продажа недвижемости', ['route' => 'orders_list']);
+        $menu->addChild('Аренда недвижемости', ['route' => 'address_list']);
+        return $menu;
+    }
+
+    public function adminMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $factory->createItem('root');
+        $menu->setChildrenAttribute('class', 'nav navbar-nav');
         //$menu->addChild('CarsList', ['route' => 'car_list']);
         $menu->addChild('Продажа недвижемости', ['route' => 'orders_list']);
         $menu->addChild('Аренда недвижемости', ['route' => 'address_list']);
-       // $menu->addChild('GetCar', ['route' => 'get_free_car']);
-       // $menu->addChild('Take Orde', ['route' => 'ordersForDriver']);
+        // $menu->addChild('GetCar', ['route' => 'get_free_car']);
+        // $menu->addChild('Take Orde', ['route' => 'ordersForDriver']);
         $menu->addChild('Admin', ['route' => 'sonata_admin_dashboard']);
 
         return $menu;

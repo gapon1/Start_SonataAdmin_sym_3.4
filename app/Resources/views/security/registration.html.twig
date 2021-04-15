@@ -1,11 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login Admin GMA{% endblock %}
+{% block title %}Регистрация Brocker GMA{% endblock %}
 
 {% block body %}
-    <div class="register_form">
-    <h2>Registration</h2>
+<style>
+    /* Full-width input fields */
+    input[type=text], input[type=password],  input[type=email] {
+        width: 100%;
+        padding: 20px;
+        margin: 5px 0 0 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
 
+    /* Set a style for the submit button */
+    .registerbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+    b{
+       color: #4CAF50;
+        font-weight: bold;
+    }
+
+</style>
+
+    <div class="register_form">
+        <h1>Регистрация</h1>
+        <p><b><i>После регистрации вы получите возможность просмотра базы объектов недвижимости.</i></b></p>
+        <hr>
     <div class="form-wrapper">
         <form method="post" class="contactForm">
             {{ form_start(form) }}
@@ -14,9 +44,12 @@
             {{ form_row(form.plainPassword.first) }}
             {{ form_row(form.plainPassword.second) }}
 
-            <button type="submit">Register!</button>
+            <button class="registerbtn" type="submit">Отправить!</button>
             {{ form_end(form) }}
         </form>
+        <div class="signin">
+            <p>Уже есть аккаунт? <a href="/admin/login">Вход</a>.</p>
+        </div>
     </div>
     </div>
 

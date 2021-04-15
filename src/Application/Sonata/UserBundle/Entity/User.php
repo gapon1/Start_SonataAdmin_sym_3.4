@@ -16,7 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @link http://www.doctrine-project.org/projects/orm/2.0/docs/reference/working-with-objects/en
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="It looks like your already have an account!")
+ * @UniqueEntity(fields={"email"}, message="Аккаунт с таки email уже существует!")
+ * @UniqueEntity(fields={"username"}, message="Аккаунт с таки именем уже существует!")
  */
 class User extends BaseUser
 {
