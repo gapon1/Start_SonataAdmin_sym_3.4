@@ -128,7 +128,7 @@ final class Versions
   'zendframework/zend-eventmanager' => '3.2.1@a5e2583a211f73604691586b8406ff7296a946dd',
   'sensio/generator-bundle' => 'v3.1.7@28cbaa244bd0816fd8908b93f90380bcd7b67a65',
   'symfony/phpunit-bridge' => 'v3.4.47@120273ad5d03a8deee08ca9260e2598f288f2bac',
-  'symfony/framework-standard-edition' => '3.4.x-dev@c51a0ddf7ced418e2a5e9fd8e815887c6974e4a7',
+  'symfony/framework-standard-edition' => '3.4.x-dev@9c1c64d4013d1407338158fe669e2f14727b2b42',
 );
 
     private function __construct()
