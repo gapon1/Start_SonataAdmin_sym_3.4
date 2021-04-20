@@ -33,47 +33,58 @@
 <body>
 
 
-<header  id="body" >
-    <nav class=" navbar-expand-lg navbar-dark bg-dark navbar-inner">
+<!-- Navigation -->
+    <nav class="navbar-expand-lg navbar-dark bg-dark navbar-fixed-top" role="navigation">
+
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">Broker GMA</a>
-            </div>
-        <ul class="nav navbar-nav navigation-menu" id="top_menu">
-            <li><a href="{{ path('homepage') }}">Главная</a></li>
-{#            <li><a href="{{ path('about') }}">About</a></li>#}
-{#            <li><a href="{{ path('contact') }}">Contact</a></li>#}
-            {% if is_granted('ROLE_ADMIN') %}
-                <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:adminMenu') }} </li>
-            {% elseif is_granted('ROLE_CUSTOMER') %}
-                <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:customerMenu') }} </li>
-            {% elseif is_granted('ROLE_USER') %}
-                <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:mainMenu') }} </li>
-            {% elseif is_granted('ROLE_DRIVER') %}
-                <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:driverMenu') }} </li>
-            {% endif %}
-
-            {% if is_granted('ROLE_USER') %}
-                <li class="right">
-                    <a class="login_btn" href="/admin/logout"><i class="fa fa-sign-out-alt"></i>
-                        Выйти</a>
-                </li>
-            {% else %}
-                <li class="right-side">
-                    <a class="login_btn" href="/admin/login"><i class="fa fa-sign-in"></i>
-                        Вход</a>
-                </li>
-                <li class="right-side">
-                    <a class="login_btn" href="/register"><i class="fa fa-user-plus"></i>
-                        Регистрация</a>
-                </li>
-            {% endif %}
-        </ul>
+        <!-- Logo and responsive toggle -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Broker GMA</a>
         </div>
-    </nav>
-</header>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav navigation-menu navbar-right" id="top_menu">
+                <li><a href="{{ path('homepage') }}">Главная</a></li>
+                {#            <li><a href="{{ path('about') }}">About</a></li>#}
+                {#            <li><a href="{{ path('contact') }}">Contact</a></li>#}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:adminMenu') }} </li>
+                {% elseif is_granted('ROLE_CUSTOMER') %}
+                    <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:customerMenu') }} </li>
+                {% elseif is_granted('ROLE_USER') %}
+                    <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:mainMenu') }} </li>
+                {% elseif is_granted('ROLE_DRIVER') %}
+                    <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:driverMenu') }} </li>
+                {% endif %}
 
+                {% if is_granted('ROLE_USER') %}
+                    <li class="right">
+                        <a class="login_btn" href="/admin/logout"><i class="fa fa-sign-out-alt"></i>
+                            Выйти</a>
+                    </li>
+                {% else %}
+                    <li class="right-side">
+                        <a class="login_btn" href="/admin/login"><i class="fa fa-sign-in"></i>
+                            Вход</a>
+                    </li>
+                    <li class="right-side">
+                        <a class="login_btn" href="/register"><i class="fa fa-user-plus"></i>
+                            Регистрация</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
 <!-- Content -->
 
             {% for msg in app.session.flashBag.get('success') %}
@@ -93,24 +104,10 @@
             <div class="col-lg-12">
                 <!-- copyright -->
                 <div class="copyright text-center">
-                    <a href="index.html">
-                        <!-- <img src="images/logo-meghna.png" alt="Meghna" />  -->
-                        <svg width="40px" height="40px" viewBox="0 0 45 44" version="1.1"
-                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g id="Group" transform="translate(2.000000, 2.000000)" stroke="#57CBCC"
-                                   stroke-width="3">
-                                    <ellipse id="Oval" cx="20.5" cy="20" rx="20.5" ry="20"></ellipse>
-                                    <path d="M6,7 L33.5,34.5" id="Line-2" stroke-linecap="square"></path>
-                                    <path d="M21,20 L34,7" id="Line-3" stroke-linecap="square"></path>
-                                </g>
-                            </g>
-                        </svg>
-                    </a>
+
                     <br/>
 
-                    <p>Design And Developed by <a href="http://www.themefisher.com">Themefisher.com</a>. Copyright
-                        &copy;
+                    <p>Copyright &copy;
                         <script>
                             document.write(new Date().getFullYear())
                         </script>
@@ -123,16 +120,6 @@
         </div> <!-- end row -->
     </div> <!-- end container -->
 </footer> <!-- end footer -->
-
-
-{% block javascripts %}
-
-    <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
-
-    <!-- Template Custom Javascript File -->
-    <script src="assets/js/custom.js"></script>
-{% endblock %}
-
 
 </body>
 </html>

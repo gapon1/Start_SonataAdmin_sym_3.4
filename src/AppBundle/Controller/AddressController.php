@@ -71,7 +71,8 @@ class AddressController extends Controller
                 ]
             );
         }else{
-            throw $this->createNotFoundException('The page does not exist');
+            return $this->redirect('/admin/login');
+//            throw $this->createNotFoundException('The page does not exist');
         }
         return $this->render('homepage');
     }

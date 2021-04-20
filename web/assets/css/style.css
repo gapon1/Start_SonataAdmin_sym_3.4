@@ -2603,6 +2603,7 @@ img.alignright {
     margin-bottom: 50px;
 }
 #custom-filter{
+    margin-top: 50px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -2759,4 +2760,10 @@ tfoot tr th select{
 
 .navbar-toggle span {
     background: #fff;
+}
+
+@media (min-width: 992px){
+    .navbar-expand-lg .navbar-collapse{
+    display: block!important;
+    }
 }

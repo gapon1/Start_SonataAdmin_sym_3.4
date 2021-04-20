@@ -109,6 +109,10 @@ sensio_framework_extra:
    router:
         annotations: false
 
+sonata_admin:
+    title:      Broker GMA
+    title_logo: /assets/img/logo.png
+
 sonata_block:
     default_contexts: [cms]
     blocks:
