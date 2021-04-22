@@ -17,7 +17,8 @@
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
     {% endblock %}
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
     <!-- fav and touch icons -->
     <link rel="shortcut icon" href="{{ asset('assets/ico/favicon.ico') }}">
@@ -34,9 +35,8 @@
 
 
 <!-- Navigation -->
-    <nav class="navbar-expand-lg navbar-dark bg-dark navbar-fixed-top" role="navigation">
-
-        <div class="container">
+<nav class="navbar-expand-lg navbar-dark bg-dark navbar-fixed-top" role="navigation">
+    <div class="container top_menu_container">
         <!-- Logo and responsive toggle -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
@@ -47,12 +47,13 @@
             </button>
             <a class="navbar-brand" href="#">Broker GMA</a>
         </div>
+        <div class="phone_number"><a class="navbar-brand" href="tel:+38067 842 46 43">+38067 842 46 43</a></div>
         <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="navbar">
-        <ul class="nav navbar-nav navigation-menu navbar-right" id="top_menu">
+            <ul class="nav navbar-nav navigation-menu navbar-right" id="top_menu">
                 <li><a href="{{ path('homepage') }}">Главная</a></li>
-                {#            <li><a href="{{ path('about') }}">About</a></li>#}
-                {#            <li><a href="{{ path('contact') }}">Contact</a></li>#}
+                {# <li><a href="{{ path('about') }}">About</a></li> #}
+                {# <li><a href="{{ path('contact') }}">Contact</a></li> #}
                 {% if is_granted('ROLE_ADMIN') %}
                     <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:adminMenu') }} </li>
                 {% elseif is_granted('ROLE_CUSTOMER') %}
@@ -61,6 +62,8 @@
                     <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:mainMenu') }} </li>
                 {% elseif is_granted('ROLE_DRIVER') %}
                     <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:driverMenu') }} </li>
+                {% else %}
+                    <li class="color_menu"> {{ knp_menu_render('AppBundle:Builder:customerMenu') }} </li>
                 {% endif %}
 
                 {% if is_granted('ROLE_USER') %}
@@ -87,13 +90,13 @@
 </nav>
 <!-- Content -->
 
-            {% for msg in app.session.flashBag.get('success') %}
-                <div class="alert alert-success">
-                    {{ msg }}
-                </div>
-            {% endfor %}
-            {% block body %}
-            {% endblock %}
+{% for msg in app.session.flashBag.get('success') %}
+    <div class="alert alert-success">
+        {{ msg }}
+    </div>
+{% endfor %}
+{% block body %}
+{% endblock %}
 
 
 <!-- Footer

@@ -17,7 +17,7 @@ class AddressController extends Controller
     public function indexAction(Request $request)
     {
 
-        if ($this->isGranted('ROLE_ADMIN')) {
+//        if ($this->isGranted('ROLE_ADMIN')) {
 
             $em = $this->getDoctrine()->getManager();
             $addresses = $em->getRepository('AppBundle:Address')
@@ -70,10 +70,11 @@ class AddressController extends Controller
                     'sendForm' => $sendForm->createView(),
                 ]
             );
-        }else{
-            return $this->redirect('/admin/login');
-//            throw $this->createNotFoundException('The page does not exist');
-        }
+//        }
+//        else{
+//            return $this->redirect('/admin/login');
+////            throw $this->createNotFoundException('The page does not exist');
+//        }
         return $this->render('homepage');
     }
 
