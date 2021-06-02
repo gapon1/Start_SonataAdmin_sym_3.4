@@ -2111,3 +2111,7 @@ blockquote {
   flex-direction: row;
   justify-content: space-between;
 }
+
+.search-icon > img{
+  margin-top: 30px;
+}
