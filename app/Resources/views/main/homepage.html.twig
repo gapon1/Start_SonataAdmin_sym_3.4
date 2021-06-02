@@ -319,24 +319,18 @@
 
                     <!-- Contact Form -->
                     <div class="contact-form col-md-6 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <form id="contact-form" method="post" action="sendmail.php" role="form">
-
+                            {{ form_start(form, {'attr': {'id': 'contact-form'}}) }}
+                            {{ form_errors(form) }}
                             <div class="form-group">
-                                <input type="text" placeholder="Ваше имя" class="form-control" name="name" id="name">
+                                {{ form_row(form.name) }}
                             </div>
-
                             <div class="form-group">
-                                <input type="email" placeholder="Ваше Email" class="form-control" name="email" id="email">
+                                {{ form_row(form.email) }}
                             </div>
-
                             <div class="form-group">
-                                <input type="text" placeholder="Тема" class="form-control" name="subject" id="subject">
+                                {{ form_row(form.message) }}
                             </div>
-
-                            <div class="form-group">
-                        <textarea rows="6" placeholder="Сообщение" class="form-control" name="message"
-                                  id="message"></textarea>
-                            </div>
+                            {{ form_end(form) }}
 
                             <div id="mail-success" class="success">
                                 Thank you. The Mailman is on His Way :)
@@ -344,10 +338,6 @@
 
                             <div id="mail-fail" class="error">
                                 Sorry, don't know what happened. Try later :(
-                            </div>
-
-                            <div id="cf-submit">
-                                <input type="submit" id="contact-submit" class="btn btn-transparent" value="Отправить">
                             </div>
 
                         </form>
