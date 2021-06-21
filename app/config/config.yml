@@ -8,6 +8,10 @@ imports:
 parameters:
     locale: ru
 
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
 framework:
     translator: { fallbacks: [ru] }
     templating:
