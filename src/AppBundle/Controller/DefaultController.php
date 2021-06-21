@@ -41,10 +41,10 @@ class DefaultController extends Controller
         if ($_POST) {
             $messageForm = \Swift_Message::newInstance()
                 ->setSubject('Форма Контактная информация')
-                ->setFrom('brokergma_test@brokergma.com')
-                ->setTo('brokergma_test@brokergma.com')
+                ->setFrom($_POST['form']['email'])
+                ->setTo('marynchenko.a.g@gmail.com')
                 ->setBody(
-                    $_POST['form']['message'] . '<br>' .
+                    "Message: " . $_POST['form']['message'] . '<br>' .
                     "Name: " . $_POST['form']['name'] . '<br>' .
                     "Email: " . $_POST['form']['email'] . '<br>',
                     'text/html'
