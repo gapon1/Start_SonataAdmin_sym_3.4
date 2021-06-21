@@ -46,14 +46,14 @@ class DefaultController extends Controller
                 ->setBody(
                     $_POST['form']['message'] . '<br>' .
                     "Name: " . $_POST['form']['name'] . '<br>' .
-                    "Email: " . $_POST['form']['email'] . '<br>' .
+                    "Email: " . $_POST['form']['email'] . '<br>',
                     'text/html'
                 );
 
-            $this->get('mailer')->send($messageForm);
-
             $status = "success";
             $message = "new department saved";
+            $this->get('mailer')->send($messageForm);
+
         }else{
             $message = "invalid form data";
         }
