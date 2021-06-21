@@ -325,3 +325,38 @@ function initialize() {
 	map.setMapTypeId('roadatlas');
 }
 
+// Send form
+$(document).on("click", "#form_send", function(e){
+	e.preventDefault();
+	var form = $("#contact-form");
+
+	// you could make use of html5 form validation here
+	if(!form[0].checkValidity()){
+		form[0].reportValidity();
+		return false;
+	}
+
+	// get the serialized properties and values of the form
+	var form_data = form.serialize();
+	// simple approach avoid submitting multiple times
+	$('#form_send').attr("disabled",true);
+
+	// the actual request to your newAction
+	$.ajax({
+		url: '/form_new',
+		type: 'POST',
+		dataType: 'json',
+		data: form_data,
+		success:function(data){
+			// handling the response data from the controller
+			if(data.status == 'error'){
+				console.log("[API] ERROR: "+data.message);
+			}
+			if(data.status == 'success'){
+				$('#contact-form')[0].reset();
+				$('#myModal').modal('show');
+			}
+			//$('#mySubmitButton').attr("disabled",false);
+		}
+	});
+});

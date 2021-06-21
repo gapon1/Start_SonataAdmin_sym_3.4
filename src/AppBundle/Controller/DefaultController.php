@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,28 +27,46 @@ class DefaultController extends Controller
             ->getForm();
 
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Заявка на аренду')
-                ->setFrom('brokergma@thebroker.website')
-                ->setTo('gapon007@ukr.net')
-                ->setBody(
-                    $form->getData()['message'] . '<br>' .
-                    "Name: " . $form->getData()['name'] . '<br>' .
-                    "Email: " . $form->getData()['email'] . '<br>' .
-                    'text/html'
-                );
-
-            $this->get('mailer')->send($message);
-            $this->addFlash('success', 'Заявка успешно отправлена!');
-        }
-
         return $this->render('main/homepage.html.twig',
             [
                 'form' => $form->createView()
             ]);
     }
+
+    /**
+     * @Route("/form_new", name="form_new")
+     */
+    public function newAction()
+    {
+        if ($_POST) {
+            $messageForm = \Swift_Message::newInstance()
+                ->setSubject('Заявка на аренду')
+                ->setFrom('bronsonpro@ukr.net')
+                ->setTo('gapon007@ukr.net')
+                ->setBody(
+                    $_POST['form']['message'] . '<br>' .
+                    "Name: " . $_POST['form']['name'] . '<br>' .
+                    "Email: " . $_POST['form']['email'] . '<br>' .
+                    'text/html'
+                );
+
+            $this->get('mailer')->send($messageForm);
+
+            $status = "success";
+            $message = "new department saved";
+        }else{
+            $message = "invalid form data";
+        }
+
+        $response = array(
+            'status' => $status,
+            'message' => $message
+        );
+
+        return new JsonResponse($response);
+
+    }
+
     /**
      * @Route("/about", name="about")
      */
